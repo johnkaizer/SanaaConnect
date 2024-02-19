@@ -1,0 +1,37 @@
+
+C
+java:S1604u"(Make this anonymous inner class a lambda(Ò™À€ûÿÿÿÿ
+C
+java:S1604a"(Make this anonymous inner class a lambda(¸Çì¥úÿÿÿÿ
+C
+java:S1604R"(Make this anonymous inner class a lambda(ü©àòûÿÿÿÿ
+?
+java:S1604’"(Make this anonymous inner class a lambda(«ÕŸ÷
+D
+java:S1604š"(Make this anonymous inner class a lambda(çÄİöøÿÿÿÿ
+D
+java:S1604¨"(Make this anonymous inner class a lambda(ó¿ÈŒüÿÿÿÿ
+D
+java:S1604µ"(Make this anonymous inner class a lambda(Ó÷•ëÿÿÿÿÿ
+D
+java:S1604Ñ"(Make this anonymous inner class a lambda(¢´ùÿÿÿÿ
+D
+java:S1604Ö"(Make this anonymous inner class a lambda(œÁÈÌşÿÿÿÿ
+>
+java:S1604à"(Make this anonymous inner class a lambda(×ì³9
+D
+java:S1604æ"(Make this anonymous inner class a lambda(œÁÈÌşÿÿÿÿ
+D
+java:S1659/".Declare "buttonDeleteUser" on a separate line.(Ãµ–Œ
+q
+java:S2159F"VRemove this call to "equals"; comparisons between unrelated types always return false.(äó‡şÿÿÿÿ
+f
+java:S3252«"OUse static access with "android.content.DialogInterface" for "BUTTON_POSITIVE".(¼¢…¬
+G
+java:S1874«"0Remove this use of "getColor"; it is deprecated.(¼¢…¬
+e
+java:S3252¬"OUse static access with "android.content.DialogInterface" for "BUTTON_NEGATIVE".(ØˆI
+F
+java:S1874¬"0Remove this use of "getColor"; it is deprecated.(ØˆI
+]
+java:S1874„"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ

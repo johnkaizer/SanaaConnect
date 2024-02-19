@@ -1,0 +1,32 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SanaaConnect" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorAccent2</item>
+        <item name="colorPrimaryVariant">@color/colorAccent2</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!--This is for enabling transition -->
+        <item name="android:windowActivityTransitions">true</item>
+        <!--Setting Up the enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/transanim</item>
+        <item name="android:windowExitTransition">@transition/transanim</item>
+
+    </style>
+
+    <style name="Theme.SanaaConnect" parent="Base.Theme.SanaaConnect" />
+
+    <style name="Theme.SanaaConnect.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.SanaaConnect.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.SanaaConnect.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

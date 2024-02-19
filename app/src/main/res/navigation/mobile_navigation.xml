@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.sanaaconnect.ui.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_messages"
+        android:name="com.example.sanaaconnect.ui.MessagesFragment"
+        android:label="Messages"
+        tools:layout="@layout/fragment_messages" />
+
+    <fragment
+        android:id="@+id/nav_jobs"
+        android:name="com.example.sanaaconnect.ui.JobsFragment"
+        android:label="My Jobs"
+        tools:layout="@layout/fragment_jobs" />
+    <fragment
+        android:id="@+id/nav_users_management"
+        android:name="com.example.sanaaconnect.ui.UsersManagementFragment"
+        android:label="Manage Users"
+        tools:layout="@layout/fragment_users_management" />
+</navigation>

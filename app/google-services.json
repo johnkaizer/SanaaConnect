@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "367067435033",
+    "firebase_url": "https://sanaa-725ce-default-rtdb.firebaseio.com",
+    "project_id": "sanaa-725ce",
+    "storage_bucket": "sanaa-725ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367067435033:android:a227d1c963ffbb5a12da88",
+        "android_client_info": {
+          "package_name": "com.example.sanaaconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSQ_VMFJuiExW5a77wuVH_0VTjb3ZLJT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

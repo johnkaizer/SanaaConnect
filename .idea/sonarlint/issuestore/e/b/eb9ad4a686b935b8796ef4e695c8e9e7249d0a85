@@ -1,0 +1,18 @@
+
+C
+java:S1604F"(Make this anonymous inner class a lambda(²Þ¢ÿÿÿÿÿ
+C
+java:S1604N"(Make this anonymous inner class a lambda(«³·øÿÿÿÿ
+C
+java:S1604q"(Make this anonymous inner class a lambda(ž‡‹ïøÿÿÿÿ
+C
+java:S1604n"(Make this anonymous inner class a lambda(Àöð¨üÿÿÿÿ
+D
+java:S1604…"(Make this anonymous inner class a lambda(œÁÈÌþÿÿÿÿ
+Y
+java:S1874[">Remove this use of "startActivityForResult"; it is deprecated.(“Œñ¬ÿÿÿÿÿ
+_
+java:S1874_"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾
+h	java:S100h"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹êƒ™øÿÿÿÿ
+]
+java:S1874°"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ

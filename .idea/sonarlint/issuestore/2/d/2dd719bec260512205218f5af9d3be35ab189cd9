@@ -1,0 +1,19 @@
+
+>
+java:S1604s"(Make this anonymous inner class a lambda(ä‡Ñ
+C
+java:S1604]"(Make this anonymous inner class a lambda(¸Çì¥úÿÿÿÿ
+C
+java:S1604N"(Make this anonymous inner class a lambda(ü©àòûÿÿÿÿ
+?
+java:S1604¢"(Make this anonymous inner class a lambda(–µá¦
+a
+java:S1659#"KDeclare "editTextPwdNew" and all following declarations on a separate line.(†Š¿
+H
+java:S1659%"2Declare "buttonReAuthenticate" on a separate line.(ÅæÕ‘
+|
+java:S1450""ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8æ¹şŠÜ1
+q
+java:S2159A"VRemove this call to "equals"; comparisons between unrelated types always return false.(äó‡şÿÿÿÿ
+]
+java:S1874Í"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ

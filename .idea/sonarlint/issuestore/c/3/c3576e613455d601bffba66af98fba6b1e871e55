@@ -1,0 +1,29 @@
+
+q
+java:S1192€"UDefine a constant instead of duplicating this literal "Something went wrong" 3 times.(Ğ„Å„ÿÿÿÿÿ
+C
+java:S1604H"(Make this anonymous inner class a lambda(Áåüšıÿÿÿÿ
+C
+java:S1604S"(Make this anonymous inner class a lambda(ıº‰×ÿÿÿÿÿ
+C
+java:S1604l"(Make this anonymous inner class a lambda(“ó¿ñûÿÿÿÿ
+>
+java:S1604_"(Make this anonymous inner class a lambda(ÁßÅ
+C
+java:S1604y"(Make this anonymous inner class a lambda(ªÊÈÒıÿÿÿÿ
+?
+java:S1604À"(Make this anonymous inner class a lambda(æçË
+i
+java:S1659*"NDeclare "editTextUpdateDoB" and all following declarations on a separate line.(ó‰­Ëıÿÿÿÿ
+_
+java:S1659-"DDeclare "textDoB" and all following declarations on a separate line.(ãÂ¥³úÿÿÿÿ
+|
+java:S1450."ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8Û½Œ‹Ü1
+@
+java:S1197c"*Move the array designators [] to the type.(‡ä¨Ë
+Q
+java:S6397‹"5Replace this character class by the character itself.(ü«Û¯ÿÿÿÿÿ
+X
+java:S6353‹"<Use concise character class syntax '\\d' instead of '[0-9]'.(ü«Û¯ÿÿÿÿÿ
+]
+java:S1874¥"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ

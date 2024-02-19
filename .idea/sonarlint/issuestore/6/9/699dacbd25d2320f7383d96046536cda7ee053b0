@@ -1,0 +1,21 @@
+
+C
+java:S1604T"(Make this anonymous inner class a lambda(Á–ªûÿÿÿÿ
+=
+java:S1604K"(Make this anonymous inner class a lambda(§‰ù3
+C
+java:S1604a"(Make this anonymous inner class a lambda(‘”ùûÿÿÿÿ
+?
+java:S1604Ü"(Make this anonymous inner class a lambda(ù¢¾
+?
+java:S1604Ë"(Make this anonymous inner class a lambda(Î±àÅ
+h
+java:S1659+"RDeclare "editTextRegisterEmail" and all following declarations on a separate line.(¼¢Áƒ
+P
+java:S6397r"5Replace this character class by the character itself.(ü«Û¯ÿÿÿÿÿ
+W
+java:S6353r"<Use concise character class syntax '\\d' instead of '[0-9]'.(ü«Û¯ÿÿÿÿÿ
+i
+java:S3776Æ"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(„ÖÜÊ
+P
+java:S1068+":Remove this unused "editTextRegisterGender" private field.(¼¢Áƒ

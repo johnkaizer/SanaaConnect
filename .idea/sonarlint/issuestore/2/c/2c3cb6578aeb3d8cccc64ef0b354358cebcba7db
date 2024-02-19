@@ -1,0 +1,26 @@
+
+>
+java:S1604K"(Make this anonymous inner class a lambda(óù®ñ
+D
+java:S1604€"(Make this anonymous inner class a lambda(­™ú©ÿÿÿÿÿ
+C
+java:S1604l"(Make this anonymous inner class a lambda(¸Çì¥úÿÿÿÿ
+C
+java:S1604^"(Make this anonymous inner class a lambda(¥Ôüÿÿÿÿ
+?
+java:S1604º"(Make this anonymous inner class a lambda(€À‚”
+D
+java:S1604¶"(Make this anonymous inner class a lambda(¸Çì¥úÿÿÿÿ
+_
+java:S1659'"IDeclare "userNewEmail" and all following declarations on a separate line.(¥ƒÖ
+?
+java:S1659)")Declare "editTextPwd" on a separate line.(ÿØƒ»
+|
+java:S1450#"ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8«³‰‹Ü1
+p
+java:S1450$"[Remove the "firebaseUser" field and declare it as a local variable in the relevant methods.(©™Š
+h
+java:S3776\"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(‡ÂÁ—
+R	java:S125Â"<This block of commented-out lines of code should be removed.(ˆ—©§
+]
+java:S1874é"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ

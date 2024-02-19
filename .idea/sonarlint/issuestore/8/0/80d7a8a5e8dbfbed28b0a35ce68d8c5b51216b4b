@@ -1,0 +1,12 @@
+
+C
+java:S1604+"(Make this anonymous inner class a lambda(½œÒËüÿÿÿÿ
+>
+java:S1604F"(Make this anonymous inner class a lambda(Ù›Ðø
+u
+java:S1450"ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ
+s
+java:S1450"]Remove the "buttonPwdReset" field and declare it as a local variable in the relevant methods.(¹¥º„
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(–òß¡úÿÿÿÿ
+Q	java:S125%"<This block of commented-out lines of code should be removed.(Äµƒí

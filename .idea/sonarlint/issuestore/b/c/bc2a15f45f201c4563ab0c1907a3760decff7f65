@@ -1,0 +1,13 @@
+
+h
+java:S1659$"MDeclare "textViewFullName" and all following declarations on a separate line.(âÈÿÿÿÿÿ
+]
+java:S1659&"BDeclare "email" and all following declarations on a separate line.(ÎÄöÿÿÿÿÿÿ
+|
+java:S1450("ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8ğÈôŠÜ1
+s
+java:S1450)"]Remove the "swipeContainer" field and declare it as a local variable in the relevant methods.(Í˜©³
+\
+java:S1874^"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ
+]
+java:S1874Ä"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ
