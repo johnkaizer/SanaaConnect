@@ -1,3 +1,15 @@
 
-d
-java:S2094"BRemove this empty class, write its code or make it an "interface".(ÇÀÑËøÿÿÿÿ8ııßŒÜ1
+t
+java:S1104"RMake userId a static final constant or non-public and provide accessors if needed.(Åïë»øÿÿÿÿ8Ó„ğ’Ü1
+v
+java:S1104"TMake fullName a static final constant or non-public and provide accessors if needed.(Åïë»øÿÿÿÿ8ì³Ğ’Ü1
+s
+java:S1104"QMake email a static final constant or non-public and provide accessors if needed.(Åïë»øÿÿÿÿ8í³Ğ’Ü1
+s
+java:S1104"QMake phone a static final constant or non-public and provide accessors if needed.(Åïë»øÿÿÿÿ8í³Ğ’Ü1
+v
+java:S1104"TMake password a static final constant or non-public and provide accessors if needed.(Åïë»øÿÿÿÿ8í³Ğ’Ü1
+r
+java:S1104"PMake role a static final constant or non-public and provide accessors if needed.(Åïë»øÿÿÿÿ8î³Ğ’Ü1
+g
+java:S1659"EDeclare "fullName" and all following declarations on a separate line.(Åïë»øÿÿÿÿ8á„ğ’Ü1

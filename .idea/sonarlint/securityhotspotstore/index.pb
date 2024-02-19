@@ -234,3 +234,9 @@ C
 hs_err_pid18380.log,3\c\3ccfab7476eba8f7358349d05a80359404075813
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
+m
+=app/src/main/java/com/example/sanaaconnect/auth/Register.java,8\1\81d1b30f7948852953ca2dbba55ab90b9cb2963d
+j
+:app/src/main/java/com/example/sanaaconnect/auth/Login.java,6\c\6c459a6b35d28949aa45097fba1bd4a3a41696b2
+s
+Capp/src/main/java/com/example/sanaaconnect/constants/Constants.java,e\7\e7da6a7531e1e512e8f2ac73a831866eb0f090f1

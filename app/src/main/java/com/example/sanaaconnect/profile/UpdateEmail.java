@@ -191,7 +191,7 @@ public class UpdateEmail extends AppCompatActivity {
                             if (updateEmailTask.isSuccessful()) {
                                 // Email update verification sent
                                 Toast.makeText(UpdateEmail.this, "Verification email sent. Please check your email", Toast.LENGTH_SHORT).show();
-                                /*Intent intent = new Intent(UpdateEmail.this, CreatorLogin.class);
+                                /*Intent intent = new Intent(UpdateEmail.this, Login.class);
                                 startActivity(intent);
                                 finish(); */
 

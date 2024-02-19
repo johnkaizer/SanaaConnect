@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.sanaaconnect.R;
-import com.example.sanaaconnect.auth.RegisterCreator;
-import com.example.sanaaconnect.auth.CreatorLogin;
+import com.example.sanaaconnect.auth.Login;
+import com.example.sanaaconnect.auth.Register;
 
 public class CreatorWelcomePage extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class CreatorWelcomePage extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreatorWelcomePage.this, CreatorLogin.class);
+                Intent intent = new Intent(CreatorWelcomePage.this, Login.class);
                 startActivity(intent);
             }
         });
@@ -36,7 +36,7 @@ public class CreatorWelcomePage extends AppCompatActivity {
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreatorWelcomePage.this, RegisterCreator.class);
+                Intent intent = new Intent(CreatorWelcomePage.this, Register.class);
                 startActivity(intent);
 
             }

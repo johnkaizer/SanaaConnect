@@ -1,17 +1,19 @@
 
->
-java:S16045"(Make this anonymous inner class a lambda(ÁıŞÿ
-C
-java:S1604?"(Make this anonymous inner class a lambda(Ğú…«ûÿÿÿÿ
->
-java:S1604M"(Make this anonymous inner class a lambda(óù®ñ
-C
-java:S1604_"(Make this anonymous inner class a lambda(£ìÒèøÿÿÿÿ
-C
-java:S1604|"(Make this anonymous inner class a lambda(’Å–½ÿÿÿÿÿ
-?
-java:S1604­"(Make this anonymous inner class a lambda(«ÕŸ÷
-I
-java:S1659#".Declare "editTextLoginPwd" on a separate line.(¢”Éğøÿÿÿÿ
-m
-java:S3776{"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(úæ—ûÿÿÿÿ
+E
+java:S1604?"(Make this anonymous inner class a lambda(ÁıŞÿ8í’Ü“Ü1
+J
+java:S1604I"(Make this anonymous inner class a lambda(Ğú…«ûÿÿÿÿ8î’Ü“Ü1
+E
+java:S1604W"(Make this anonymous inner class a lambda(óù®ñ8ï’Ü“Ü1
+J
+java:S1604i"(Make this anonymous inner class a lambda(£ìÒèøÿÿÿÿ8ï’Ü“Ü1
+K
+java:S1604†"(Make this anonymous inner class a lambda(’Å–½ÿÿÿÿÿ8ğ’Ü“Ü1
+F
+java:S1604Ò"(Make this anonymous inner class a lambda(«ÕŸ÷8ñ’Ü“Ü1
+P
+java:S1659)".Declare "editTextLoginPwd" on a separate line.(¢”Éğøÿÿÿÿ8¾”Ü“Ü1
+|
+java:S1450-"ZRemove the "preferences" field and declare it as a local variable in the relevant methods.(„€Àóûÿÿÿÿ8¾”Ü“Ü1
+u
+java:S3776…"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(úæ—ûÿÿÿÿ8ì”Ü“Ü1

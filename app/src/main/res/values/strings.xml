@@ -7,6 +7,11 @@
     <string name="next">Next</string>
     <string name="welcome_head_profile">Welcome, %1$s! </string>
     <string name="previous">Previous</string>
+    //User roles
+    <string-array name="roles">
+        <item>Client</item>
+        <item>Professional</item>
+    </string-array>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

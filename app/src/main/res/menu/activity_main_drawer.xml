@@ -10,15 +10,15 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_messages"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/chat"
             android:title="Messages" />
         <item
             android:id="@+id/nav_jobs"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/suitcase"
             android:title="My Jobs" />
         <item
             android:id="@+id/nav_users_management"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/management"
             android:title="Manage Users" />
     </group>
 </menu>

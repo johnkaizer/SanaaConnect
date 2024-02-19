@@ -1,21 +1,17 @@
 
-C
-java:S1604T"(Make this anonymous inner class a lambda(Á–ªûÿÿÿÿ
-=
-java:S1604K"(Make this anonymous inner class a lambda(§‰ù3
-C
-java:S1604a"(Make this anonymous inner class a lambda(‘”ùûÿÿÿÿ
-?
-java:S1604Ü"(Make this anonymous inner class a lambda(ù¢¾
-?
-java:S1604Ë"(Make this anonymous inner class a lambda(Î±àÅ
-h
-java:S1659+"RDeclare "editTextRegisterEmail" and all following declarations on a separate line.(¼¢Áƒ
-P
-java:S6397r"5Replace this character class by the character itself.(ü«Û¯ÿÿÿÿÿ
-W
-java:S6353r"<Use concise character class syntax '\\d' instead of '[0-9]'.(ü«Û¯ÿÿÿÿÿ
-i
-java:S3776Æ"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(„ÖÜÊ
-P
-java:S1068+":Remove this unused "editTextRegisterGender" private field.(¼¢Áƒ
+K
+java:S1604„"(Make this anonymous inner class a lambda(¯É¢Çşÿÿÿÿ8±ÉÂ“Ü1
+J
+java:S1604K"(Make this anonymous inner class a lambda(Üá¼úÿÿÿÿ8²ÉÂ“Ü1
+l
+java:S16596"JDeclare "editTextEmail" and all following declarations on a separate line.(é€¸Ñüÿÿÿÿ8±½“Ü1
+x
+java:S14503"VRemove the "binding" field and declare it as a local variable in the relevant methods.(åÊ‹ßüÿÿÿÿ8±½“Ü1
+t
+java:S3776:"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(¨Œşÿÿÿÿ8«ÊÂ“Ü1
+Q
+java:S1874­"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8öŞ¾“Ü1
+Z
+java:S1874­"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8ÑÊÂ“Ü1
+V
+java:S1874®"3Remove this use of "isConnected"; it is deprecated.(•İºŠùÿÿÿÿ8ÒÊÂ“Ü1
