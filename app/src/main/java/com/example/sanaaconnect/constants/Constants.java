@@ -14,5 +14,18 @@ public class Constants {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         return (currentUser != null) ? currentUser.getUid() : null;
     }
+
+    // Get signed-in user email
+    public static String getUserEmail() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return (currentUser != null) ? currentUser.getEmail() : null;
+    }
+
+    // Get signed-in user phone number
+    public static String getUserPhone() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return (currentUser != null) ? currentUser.getPhoneNumber() : null;
+    }
 }
+
 

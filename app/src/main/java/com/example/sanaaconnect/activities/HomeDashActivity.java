@@ -110,6 +110,8 @@ public class HomeDashActivity extends AppCompatActivity {
             navMenu.findItem(R.id.nav_users_management).setVisible(true);
         }else if("Client".equals(userRole)){
             navMenu.findItem(R.id.nav_jobs).setVisible(true);
+        }else if("Professional".equals(userRole)){
+            navMenu.findItem(R.id.nav_skill_profile).setVisible(true);
         }
     }
 

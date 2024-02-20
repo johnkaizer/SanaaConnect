@@ -59,7 +59,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 String email = editTextEmail.getText().toString().trim();
                 String fullName = editTextName.getText().toString().trim();
-                String phone = editTextPhone.getText().toString().trim();
+                String phoneNumber = editTextPhone.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 String role = spinner.getSelectedItem().toString().trim();
 
@@ -78,12 +78,12 @@ public class Register extends AppCompatActivity {
                     editTextEmail.requestFocus();
                     return;
                 }
-                if (phone.isEmpty()) {
+                if (phoneNumber.isEmpty()) {
                     editTextPhone.setError("Phone number is required!");
                     editTextPhone.requestFocus();
                     return;
                 }
-                if (phone.length() != 10) {
+                if (phoneNumber.length() != 10) {
                     editTextPhone.setError("Phone number must be 10 digits!");
                     editTextPhone.requestFocus();
                     return;
@@ -129,7 +129,7 @@ public class Register extends AppCompatActivity {
                                         String userId = usersRef.push().getKey();
 
                                         // Create a User object with the provided details
-                                        Users newUser = new Users(userId,fullName, email, phone, password, role);
+                                        Users newUser = new Users(userId,fullName, email, phoneNumber, password, role);
 
                                         // Save user details to the database
                                         usersRef.child(currentUser.getUid()).setValue(newUser);

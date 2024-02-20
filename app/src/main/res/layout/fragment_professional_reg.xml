@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.JobsFragment"
-    android:background="@color/white"
-    android:orientation="vertical">
+    tools:context=".ui.ProfessionalRegFragment">
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="0dp"
@@ -27,12 +26,12 @@
 
 
     <Button
-        android:id="@+id/addJobs"
+        android:id="@+id/addSkills"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="8dp"
-        android:text="Create New Job"
+        android:text="Register Skill Profile"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/editText"
@@ -40,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/jobsRv"
+        android:id="@+id/skillsRv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -50,6 +49,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addJobs" />
+        app:layout_constraintTop_toBottomOf="@+id/addSkills" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,4 +27,9 @@
         android:name="com.example.sanaaconnect.ui.UsersManagementFragment"
         android:label="Manage Users"
         tools:layout="@layout/fragment_users_management" />
+    <fragment
+        android:id="@+id/nav_skill_profile"
+        android:name="com.example.sanaaconnect.ui.ProfessionalRegFragment"
+        android:label="Skills Profile"
+        tools:layout="@layout/fragment_professional_reg" />
 </navigation>

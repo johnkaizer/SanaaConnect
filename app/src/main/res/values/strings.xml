@@ -12,7 +12,42 @@
         <item>Client</item>
         <item>Professional</item>
     </string-array>
-
+    //Experience Levels
+    <string-array name="experience_levels">
+        <item>1 – 2 years</item>
+        <item>2 – 4 years</item>
+        <item>4 – 6 years</item>
+        <item>7 – 8 years</item>
+        <item>8 – 10 years</item>
+        <item>10+ years</item>
+    </string-array>
+    //Education Levels
+    <string-array name="education_levels">
+        <item>Doctorate (PhD)</item>
+        <item>Master\'s Degree</item>
+        <item>Bachelor\'s Degree</item>
+        <item>Diploma</item>
+        <item>Certificate</item>
+        <item>Training</item>
+    </string-array>
+    //Profession
+    <string-array name="professional_titles">
+        <item>Engineer</item>
+        <item>Doctor</item>
+        <item>Teacher</item>
+        <item>Videographer</item>
+        <item>Software Developer</item>
+        <item>Graphic Designer</item>
+        <item>Lawyer</item>
+        <item>Architect</item>
+        <item>Accountant</item>
+        <item>Musician</item>
+        <item>Photographer</item>
+        <item>Marketing Specialist</item>
+        <item>Chef</item>
+        <item>Writer</item>
+        <item>Artist</item>
+    </string-array>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

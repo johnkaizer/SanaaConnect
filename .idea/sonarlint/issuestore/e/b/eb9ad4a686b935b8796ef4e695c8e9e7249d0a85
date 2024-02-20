@@ -1,18 +1,18 @@
 
-C
-java:S1604F"(Make this anonymous inner class a lambda(²Ş¢ÿÿÿÿÿ
-C
-java:S1604N"(Make this anonymous inner class a lambda(«³·øÿÿÿÿ
-C
-java:S1604q"(Make this anonymous inner class a lambda(‡‹ïøÿÿÿÿ
-C
-java:S1604n"(Make this anonymous inner class a lambda(Àöğ¨üÿÿÿÿ
-D
-java:S1604…"(Make this anonymous inner class a lambda(œÁÈÌşÿÿÿÿ
-Y
-java:S1874[">Remove this use of "startActivityForResult"; it is deprecated.(“Œñ¬ÿÿÿÿÿ
-_
-java:S1874_"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾
-h	java:S100h"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹êƒ™øÿÿÿÿ
-]
-java:S1874°"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ
+J
+java:S1604F"(Make this anonymous inner class a lambda(²Ş¢ÿÿÿÿÿ8®ÖÓ½Ü1
+J
+java:S1604N"(Make this anonymous inner class a lambda(«³·øÿÿÿÿ8®ÖÓ½Ü1
+J
+java:S1604q"(Make this anonymous inner class a lambda(‡‹ïøÿÿÿÿ8¯ÖÓ½Ü1
+J
+java:S1604n"(Make this anonymous inner class a lambda(Àöğ¨üÿÿÿÿ8¯ÖÓ½Ü1
+K
+java:S1604…"(Make this anonymous inner class a lambda(œÁÈÌşÿÿÿÿ8°ÖÓ½Ü1
+`
+java:S1874[">Remove this use of "startActivityForResult"; it is deprecated.(“Œñ¬ÿÿÿÿÿ8çÚÓ½Ü1
+f
+java:S1874_"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8çÚÓ½Ü1
+o	java:S100h"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹êƒ™øÿÿÿÿ8éÚÓ½Ü1
+d
+java:S1874°"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8“ÛÓ½Ü1

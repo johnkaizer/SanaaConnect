@@ -1,5 +1,16 @@
 
-~
-java:S1488"\Immediately return this expression instead of assigning it to the temporary variable "root".(ö±îúÿÿÿÿ8Ãâú‹Ü1
-U
-java:S1161":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ
+t
+java:S1192`"WDefine a constant instead of duplicating this literal "No internet connection" 4 times.(ÿÍ´ƒ8©¹¨¿Ü1
+j
+java:S1192G"MDefine a constant instead of duplicating this literal "Job Listings" 3 times.(ËÇàÚ8ÙÊù¾Ü1
+i
+java:S1301³"KReplace this "switch" statement by "if" statements to increase readability.(¢¾§8«¹¨¿Ü1
+\
+java:S1161=":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8½¨¿Ü1
+Q
+java:S1874°"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8Ïù¾Ü1
+Z
+java:S1874°"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8Ó½¨¿Ü1
+V
+java:S1874±"3Remove this use of "isConnected"; it is deprecated.(•İºŠùÿÿÿÿ8Õ½¨¿Ü1
+?	java:S131³""Add a default case to this switch.(¢¾§8é½¨¿Ü1

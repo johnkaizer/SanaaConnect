@@ -21,6 +21,6 @@ p
 java:S1450$"[Remove the "firebaseUser" field and declare it as a local variable in the relevant methods.(©™Š
 h
 java:S3776\"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(‡ÂÁ—
-R	java:S125Â"<This block of commented-out lines of code should be removed.(ˆ—©§
+R	java:S125Â"<This block of commented-out lines of code should be removed.(…Ô´ª
 ]
 java:S1874é"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ

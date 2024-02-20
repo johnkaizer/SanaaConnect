@@ -20,5 +20,9 @@
             android:id="@+id/nav_users_management"
             android:icon="@drawable/management"
             android:title="Manage Users" />
+        <item
+            android:id="@+id/nav_skill_profile"
+            android:icon="@drawable/skills"
+            android:title="Skills Profile" />
     </group>
 </menu>

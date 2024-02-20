@@ -141,7 +141,7 @@ public class Login extends AppCompatActivity {
                                 if (snapshot.exists()) {
                                     String role = snapshot.child("role").getValue(String.class);
                                     editor.putString("role", role);
-                                    editor.putString("userId", userId);
+                                    editor.putString("clientId", userId);
                                     editor.apply();
                                     startActivity(new Intent(Login.this, HomeDashActivity.class));
                                     finish();

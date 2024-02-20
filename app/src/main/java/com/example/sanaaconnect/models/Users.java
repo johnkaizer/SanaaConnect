@@ -1,16 +1,16 @@
 package com.example.sanaaconnect.models;
 
 public class Users {
-    public String userId,fullName, email, phone, password,role;
+    public String userId,fullName, email, phoneNumber, password,role;
 
     public Users() {
     }
 
-    public Users(String userId, String fullName, String email, String phone, String password, String role) {
+    public Users(String userId, String fullName, String email, String phoneNumber, String password, String role) {
         this.userId = userId;
         this.fullName = fullName;
         this.email = email;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.password = password;
         this.role = role;
     }
@@ -39,12 +39,12 @@ public class Users {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {

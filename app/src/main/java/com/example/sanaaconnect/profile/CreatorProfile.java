@@ -154,8 +154,8 @@ public class CreatorProfile extends AppCompatActivity {
                     //Set user dp (after upload)
                     Uri uri = firebaseUser.getPhotoUrl();
 
-                    //ImageView setImageURI() SHOULD NOT be used with regular URIs. So we are using Picasso
-                    Picasso.with(CreatorProfile.this).load(uri).into(imageview);
+                    // Use Picasso.get() instead of Picasso.with()
+                    Picasso.get().load(uri).into(imageview);
 
                 } else {
                     Toast.makeText(CreatorProfile.this, "Something went wrong", Toast.LENGTH_SHORT).show();
