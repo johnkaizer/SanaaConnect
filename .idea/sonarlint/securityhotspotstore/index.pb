@@ -268,3 +268,5 @@ Rapp/src/main/java/com/example/sanaaconnect/activities/AddSkillProfileActivity.j
 Mapp/src/main/java/com/example/sanaaconnect/activities/JobDetailsActivity.java,2\6\261ef9c474afc8ceb32a9867dfc55ec603df45de
 Å
 Qapp/src/main/java/com/example/sanaaconnect/activities/ProfileDetailsActivity.java,d\3\d35b938e04a0193eebf44228b2ed22989aab9353
+u
+Eapp/src/main/java/com/example/sanaaconnect/Adapters/UsersAdapter.java,c\3\c3db05e0463a02984f0da92a77c1216d7c861af0
