@@ -202,7 +202,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClic
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Jobs");
         homeRec.setHasFixedSize(true);
         jobList = new ArrayList<>();
-        jobAdapter = new JobAdapter(jobList);
+        jobAdapter = new JobAdapter(jobList,getContext());
         homeRec.setAdapter(jobAdapter);
         homeRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         homeRec.setNestedScrollingEnabled(false);
@@ -252,7 +252,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClic
         databaseReference = FirebaseDatabase.getInstance().getReference().child("SkillsProfile");
         homeRec.setHasFixedSize(true);
         professionList = new ArrayList<>();
-        professionAdapter = new ProfessionAdapter(professionList);
+        professionAdapter = new ProfessionAdapter(professionList,getContext());
         homeRec.setAdapter(professionAdapter);
         homeRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         homeRec.setNestedScrollingEnabled(false);

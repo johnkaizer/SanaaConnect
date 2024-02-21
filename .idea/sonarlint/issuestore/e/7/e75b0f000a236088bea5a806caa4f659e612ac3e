@@ -1,30 +1,30 @@
 
 k
-java:S1192{"IDefine a constant instead of duplicating this literal "clientId" 3 times.(Áã‘şÿÿÿÿ8Èéê­Ü1
-r	java:S117n"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—úşšùÿÿÿÿ8„ï¢¬Ü1
-m	java:S117o"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òÊªÁ8…ï¢¬Ü1
-m	java:S117q"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’°Ô8…ï¢¬Ü1
+java:S1192|"IDefine a constant instead of duplicating this literal "clientId" 3 times.(Áã‘şÿÿÿÿ8Èéê­Ü1
+r	java:S117o"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—úşšùÿÿÿÿ8„ï¢¬Ü1
+m	java:S117p"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òÊªÁ8…ï¢¬Ü1
+m	java:S117r"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’°Ô8…ï¢¬Ü1
 E
-java:S1604Z"(Make this anonymous inner class a lambda(ÌÜİ‚8êÀ¡¬Ü1
+java:S1604["(Make this anonymous inner class a lambda(ÌÜİ‚8êÀ¡¬Ü1
 J
-java:S1604R"(Make this anonymous inner class a lambda(÷øŞ¯ıÿÿÿÿ8êÀ¡¬Ü1
+java:S1604S"(Make this anonymous inner class a lambda(÷øŞ¯ıÿÿÿÿ8êÀ¡¬Ü1
 E
-java:S1604k"(Make this anonymous inner class a lambda(ĞÍÉ¨8ëÀ¡¬Ü1
+java:S1604l"(Make this anonymous inner class a lambda(ĞÍÉ¨8ëÀ¡¬Ü1
 K
-java:S1604“"(Make this anonymous inner class a lambda(¼ó÷Çøÿÿÿÿ8†ï¢¬Ü1
+java:S1604”"(Make this anonymous inner class a lambda(¼ó÷Çøÿÿÿÿ8†ï¢¬Ü1
 E
-java:S1604C"(Make this anonymous inner class a lambda(Ì Ì¸8†ï¢¬Ü1
+java:S1604D"(Make this anonymous inner class a lambda(Ì Ì¸8†ï¢¬Ü1
 t
-java:S14500"WRemove the "clientId" field and declare it as a local variable in the relevant methods.(ÙÌ¨8ıøä­Ü1
+java:S14501"WRemove the "clientId" field and declare it as a local variable in the relevant methods.(ÙÌ¨8ıøä­Ü1
 X
-java:S1874,"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ8àÁ¡¬Ü1
+java:S1874-"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ8àÁ¡¬Ü1
 \
-java:S11612":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8áÁ¡¬Ü1
+java:S11613":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8áÁ¡¬Ü1
 X
-java:S18747"6Remove this use of "ProgressDialog"; it is deprecated.(õ¹´ıüÿÿÿÿ8æÁ¡¬Ü1
+java:S18748"6Remove this use of "ProgressDialog"; it is deprecated.(õ¹´ıüÿÿÿÿ8æÁ¡¬Ü1
 T
-java:S18748"2Remove this use of "setMessage"; it is deprecated.(ÁÜ£åşÿÿÿÿ8æÁ¡¬Ü1
+java:S18749"2Remove this use of "setMessage"; it is deprecated.(ÁÜ£åşÿÿÿÿ8æÁ¡¬Ü1
 ^
-java:S1117{"<Rename "clientId" which hides the field declared at line 48.(Áã‘şÿÿÿÿ8®ùä­Ü1
+java:S1117|"<Rename "clientId" which hides the field declared at line 49.(Áã‘şÿÿÿÿ8®ùä­Ü1
 h
-java:S1117"ERename "databaseReference" which hides the field declared at line 46.(¾êŠ¹şÿÿÿÿ8³ğ¢¬Ü1
+java:S1117‚"ERename "databaseReference" which hides the field declared at line 47.(¾êŠ¹şÿÿÿÿ8³ğ¢¬Ü1

@@ -1,19 +1,26 @@
 package com.example.sanaaconnect.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sanaaconnect.activities.JobDetailsActivity;
 import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.models.JobModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,11 +30,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
+public class JobManagementAdapter extends RecyclerView.Adapter<JobManagementAdapter.ViewHolder> {
     List<JobModel>jobList;
     Context context;
 
-    public JobAdapter(List<JobModel> jobList, Context context) {
+    public JobManagementAdapter(List<JobModel> jobList, Context context) {
         this.jobList = jobList;
         this.context = context;
     }
@@ -39,16 +46,41 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public JobAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public JobManagementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.job_item, parent, false));
 
     }
     @Override
-    public void onBindViewHolder(@NonNull JobAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull JobManagementAdapter.ViewHolder holder, int position) {
         JobModel jobModel = jobList.get(position);
         holder.titleTxt.setText(jobModel.getJobTitle());
         holder.amountTxt.setText("Ksh " + jobModel.getAmount());
         holder.contentTxt.setText(jobModel.getDescription());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(context, view);
+                popupMenu.inflate(R.menu.popup_menu_management);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.menu_edit) {
+                            // Implement edit action here
+                            editJob(jobModel);
+                            return true;
+                        } else if (item.getItemId() == R.id.menu_delete) {
+                            // Implement delete action here
+                            deleteJob(jobModel);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+
 
         // Parse the saved post date
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd h:mma", Locale.getDefault());
@@ -93,23 +125,44 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
             // Handle the case where postDate is null (e.g., invalid date format)
             holder.dateTxt.setText("Invalid date");
         }
-        // Set onClickListener for the card view
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Open DetailsActivity and send the jobModel data
-                Intent intent = new Intent(context, JobDetailsActivity.class);
-                intent.putExtra("jobTitle", jobModel.getJobTitle());
-                intent.putExtra("jobAmount", jobModel.getAmount());
-                intent.putExtra("jobDescription", jobModel.getDescription());
-                intent.putExtra("jobPostDate", jobModel.getPostDate());
-                intent.putExtra("jobDeadline", jobModel.getDeadlineDate());
-                intent.putExtra("jobClientId", jobModel.getClientId());
-                context.startActivity(intent);
-            }
-        });
-
     }
+
+    private void deleteJob(JobModel jobModel) {
+        String clientId;
+        // Get the currently logged-in user's ID
+        SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        clientId = preferences.getString("clientId", "");
+        String loggedInUserId = clientId;
+
+        // Check if the job's clientId matches the logged-in user's ID
+        if (jobModel.getClientId().equals(loggedInUserId)) {
+            // If the IDs match, delete the job
+             DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference().child("Jobs").child(jobModel.getJobTitle());
+            jobRef.removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Job deleted successfully
+                            Toast.makeText(context, "Job deleted successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Failed to delete the job
+                            Toast.makeText(context, "Failed to delete job: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            // If the IDs do not match, show a message indicating that the user does not have permission to delete this job
+            Toast.makeText(context, "You do not have permission to delete this job", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void editJob(JobModel jobModel) {
+    }
+
     @Override
     public int getItemCount() {
         return jobList.size();

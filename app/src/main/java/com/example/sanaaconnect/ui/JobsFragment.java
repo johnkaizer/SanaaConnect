@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sanaaconnect.Adapters.JobAdapter;
+import com.example.sanaaconnect.Adapters.JobManagementAdapter;
 import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.databinding.FragmentJobsBinding;
 import com.example.sanaaconnect.models.JobModel;
@@ -170,7 +171,7 @@ public class JobsFragment extends Fragment {
 
         // Query to filter zones based on staff ID
         Query query = databaseReference.orderByChild("clientId").equalTo(clientId);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 jobList.clear(); // Clear existing data
@@ -185,7 +186,7 @@ public class JobsFragment extends Fragment {
                 }
 
                 // Create and set the adapter for the RecyclerView
-                JobAdapter jobAdapter = new JobAdapter(jobList);
+                JobManagementAdapter jobAdapter = new JobManagementAdapter(jobList,getContext());
                 jobRecyclerView.setAdapter(jobAdapter);
             }
 

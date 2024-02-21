@@ -256,3 +256,15 @@ z
 Japp/src/main/java/com/example/sanaaconnect/ui/ProfessionalRegFragment.java,9\2\921c9a0609a6db2aa44b71e898140d13d69754d9
 w
 Gapp/src/main/java/com/example/sanaaconnect/AddSkillProfileActivity.java,7\2\7210c98782105d676d6d505925a7a1f250dbfdab
+}
+Mapp/src/main/java/com/example/sanaaconnect/Adapters/JobManagementAdapter.java,7\a\7a1bcd69634bedf3d9d94e3c60b98a6a3779ba02
+Ñ
+Tapp/src/main/java/com/example/sanaaconnect/Adapters/ProfessionManagementAdapter.java,a\c\acf0a803867152f7e09bc9c57df4bdab1d5314b7
+r
+Bapp/src/main/java/com/example/sanaaconnect/JobDetailsActivity.java,c\f\cf56b09d15513784378d1430a3966f080e266c17
+Ç
+Rapp/src/main/java/com/example/sanaaconnect/activities/AddSkillProfileActivity.java,d\9\d9af9bb1c9c859ff80aa3ee226cef107134c18bb
+}
+Mapp/src/main/java/com/example/sanaaconnect/activities/JobDetailsActivity.java,2\6\261ef9c474afc8ceb32a9867dfc55ec603df45de
+Å
+Qapp/src/main/java/com/example/sanaaconnect/activities/ProfileDetailsActivity.java,d\3\d35b938e04a0193eebf44228b2ed22989aab9353

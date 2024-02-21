@@ -1,9 +1,7 @@
-package com.example.sanaaconnect;
+package com.example.sanaaconnect.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.constants.Constants;
 import com.example.sanaaconnect.models.ProfessionModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +36,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class AddSkillProfileActivity extends AppCompatActivity {
