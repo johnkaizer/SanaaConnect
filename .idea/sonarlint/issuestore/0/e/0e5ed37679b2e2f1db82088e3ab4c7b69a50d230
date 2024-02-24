@@ -1,0 +1,6 @@
+
+‰
+java:S1319"gThe type of "listCat" should be an interface such as "List" rather than the implementation "ArrayList".(â±ë•ÿÿÿÿÿ8ÁÀÆ®Ü1
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ
+G
+java:S1068"+Remove this unused "context" private field.(êİç8÷ÀÆ®Ü1

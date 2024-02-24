@@ -1,0 +1,16 @@
+
+r	java:S117r"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Σ¤΅ύÿÿÿÿ8­μή²έ1
+K
+java:S1604"(Make this anonymous inner class a lambda(Ολ£ωÿÿÿÿ8­μή²έ1
+K
+java:S1604”"(Make this anonymous inner class a lambda( Ήÿÿÿÿÿ8®μή²έ1
+E
+java:S1604v"(Make this anonymous inner class a lambda(ΠΝΙ¨8―μή²έ1
+K
+java:S1604¤"(Make this anonymous inner class a lambda(ΌσχΗψÿÿÿÿ8―μή²έ1
+E
+java:S1604l"(Make this anonymous inner class a lambda(ιέ„ª8―μή²έ1
+x
+java:S14502"VRemove the "binding" field and declare it as a local variable in the relevant methods.(Έ—ΝΣόÿÿÿÿ8ωνή²έ1
+„
+java:S14503"bRemove the "recyclerViewReviews" field and declare it as a local variable in the relevant methods.(ΙΏ‘ƒωÿÿÿÿ8ωνή²έ1

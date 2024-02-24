@@ -220,7 +220,7 @@ public class DeleteProfile extends AppCompatActivity {
         });
 
         //Delete Dta from Realtime database
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Registered Users");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         databaseReference.child(firebaseUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

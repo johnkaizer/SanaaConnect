@@ -1,13 +1,13 @@
 
 o
-java:S1659$"MDeclare "textViewFullName" and all following declarations on a separate line.(âÈÿÿÿÿÿ8¡äÆ½Ü1
+java:S1659("MDeclare "textViewFullName" and all following declarations on a separate line.(âÈÿÿÿÿÿ8ò¸—âİ1
 d
-java:S1659&"BDeclare "email" and all following declarations on a separate line.(ÎÄöÿÿÿÿÿÿ8£äÆ½Ü1
+java:S1659*"BDeclare "email" and all following declarations on a separate line.(ÎÄöÿÿÿÿÿÿ8ò¸—âİ1
 |
-java:S1450("ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8¤äÆ½Ü1
+java:S1450,"ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8ó¸—âİ1
 z
-java:S1450)"]Remove the "swipeContainer" field and declare it as a local variable in the relevant methods.(Í˜©³8¤äÆ½Ü1
+java:S1450-"]Remove the "swipeContainer" field and declare it as a local variable in the relevant methods.(Í˜©³8ó¸—âİ1
 c
-java:S1874^"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8ãäÆ½Ü1
+java:S1874_"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8—¹—âİ1
 d
-java:S1874Ä"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8ˆåÆ½Ü1
+java:S1874Å"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8®¹—âİ1

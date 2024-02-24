@@ -1,13 +1,6 @@
 
 C
-java:S1604D"(Make this anonymous inner class a lambda(òèµ°þÿÿÿÿ
+java:S1604&"(Make this anonymous inner class a lambda(òèµ°þÿÿÿÿ
 >
-java:S1604K"(Make this anonymous inner class a lambda(«Íñ´
-h	java:S116"SRename this field "OpenerBG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªŠãÈ
-f	java:S116"QRename this field "AdminL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø½Û¼
-i
-java:S1450"SRemove the "move" field and declare it as a local variable in the relevant methods.(ËâÍ©
-]	java:S125""<This block of commented-out lines of code should be removed.(‡÷¸Ðüÿÿÿÿ8þö…ƒÜ1
-]	java:S1250"<This block of commented-out lines of code should be removed.(¶Ç‘ÿÿÿÿÿ8œ¶ŠƒÜ1
-E
-java:S1068"(Remove this unused "move" private field.(ËâÍ©8´¶ŠƒÜ1
+java:S1604-"(Make this anonymous inner class a lambda(«Íñ´
+h	java:S116"SRename this field "OpenerBG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªŠãÈ

@@ -1,29 +1,29 @@
 
-q
-java:S1192€"UDefine a constant instead of duplicating this literal "Something went wrong" 3 times.(Ğ„Å„ÿÿÿÿÿ
-C
-java:S1604H"(Make this anonymous inner class a lambda(Áåüšıÿÿÿÿ
-C
-java:S1604S"(Make this anonymous inner class a lambda(ıº‰×ÿÿÿÿÿ
-C
-java:S1604l"(Make this anonymous inner class a lambda(“ó¿ñûÿÿÿÿ
->
-java:S1604_"(Make this anonymous inner class a lambda(ÁßÅ
-C
-java:S1604y"(Make this anonymous inner class a lambda(ªÊÈÒıÿÿÿÿ
-?
-java:S1604À"(Make this anonymous inner class a lambda(æçË
-i
-java:S1659*"NDeclare "editTextUpdateDoB" and all following declarations on a separate line.(ó‰­Ëıÿÿÿÿ
-_
-java:S1659-"DDeclare "textDoB" and all following declarations on a separate line.(ãÂ¥³úÿÿÿÿ
+x
+java:S1192"UDefine a constant instead of duplicating this literal "Something went wrong" 3 times.(Ğ„Å„ÿÿÿÿÿ8ß­µâİ1
+J
+java:S1604I"(Make this anonymous inner class a lambda(Áåüšıÿÿÿÿ8á­µâİ1
+J
+java:S1604T"(Make this anonymous inner class a lambda(ıº‰×ÿÿÿÿÿ8á­µâİ1
+J
+java:S1604m"(Make this anonymous inner class a lambda(“ó¿ñûÿÿÿÿ8á­µâİ1
+E
+java:S1604`"(Make this anonymous inner class a lambda(ÁßÅ8â­µâİ1
+J
+java:S1604z"(Make this anonymous inner class a lambda(ªÊÈÒıÿÿÿÿ8â­µâİ1
+F
+java:S1604Á"(Make this anonymous inner class a lambda(æçË8â­µâİ1
+p
+java:S1659+"NDeclare "editTextUpdateDoB" and all following declarations on a separate line.(ó‰­Ëıÿÿÿÿ8¶¯µâİ1
+f
+java:S1659."DDeclare "textDoB" and all following declarations on a separate line.(ãÂ¥³úÿÿÿÿ8·¯µâİ1
 |
-java:S1450."ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8Û½Œ‹Ü1
-@
-java:S1197c"*Move the array designators [] to the type.(‡ä¨Ë
-Q
-java:S6397‹"5Replace this character class by the character itself.(ü«Û¯ÿÿÿÿÿ
+java:S1450/"ZRemove the "authProfile" field and declare it as a local variable in the relevant methods.(âõ®Åüÿÿÿÿ8·¯µâİ1
+G
+java:S1197d"*Move the array designators [] to the type.(‡ä¨Ë8Õ¯µâİ1
 X
-java:S6353‹"<Use concise character class syntax '\\d' instead of '[0-9]'.(ü«Û¯ÿÿÿÿÿ
-]
-java:S1874¥"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ
+java:S6397Œ"5Replace this character class by the character itself.(ü«Û¯ÿÿÿÿÿ8ã¯µâİ1
+_
+java:S6353Œ"<Use concise character class syntax '\\d' instead of '[0-9]'.(ü«Û¯ÿÿÿÿÿ8ä¯µâİ1
+d
+java:S1874¦"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8ş¯µâİ1

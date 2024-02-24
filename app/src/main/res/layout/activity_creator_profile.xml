@@ -41,6 +41,7 @@
                             android:id="@+id/imageView_profile_dp"
                             android:layout_width="160dp"
                             android:layout_height="160dp"
+                            android:src="@drawable/ic_logo"
                             android:contentDescription="user_display_picture"
                             android:background="@drawable/no_profile_pic"
                             android:scaleType="centerCrop" />
@@ -102,6 +103,7 @@
                         android:layout_centerVertical="true"
                         android:layout_alignStart="@id/ic_profile"
                         android:layout_marginStart="50dp"
+                        android:textColor="@color/black"
                         android:hint="loading" />
                 </RelativeLayout>
 
@@ -136,6 +138,7 @@
                         android:layout_alignStart="@id/ic_email"
                         android:layout_marginStart="50dp"
                         android:layout_centerVertical="true"
+                        android:textColor="@color/black"
                         android:layout_marginTop="20dp"
                         android:hint="loading" />
                 </RelativeLayout>
@@ -162,7 +165,7 @@
                         android:layout_centerVertical="true"
                         android:id="@+id/ic_dob"
                         android:contentDescription="dob"
-                        android:background="@drawable/ic_birthday"/>
+                        android:background="@drawable/user3"/>
 
                     <TextView
                         android:id="@+id/textView_show_dob"
@@ -172,6 +175,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
                         android:hint="loading" />
                 </RelativeLayout>
 
@@ -207,6 +211,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
                         android:hint="loading" />
                 </RelativeLayout>
 
@@ -241,6 +246,7 @@
                         android:layout_alignStart="@id/ic_mobile"
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
                         android:hint="loading" />
                 </RelativeLayout>
 
@@ -254,8 +260,6 @@
                     android:elevation="10dp"
                     android:visibility="gone" />
             </RelativeLayout>
-
-
 
         </LinearLayout>
     </ScrollView>

@@ -1,0 +1,8 @@
+
+ˆ
+java:S1319#"lThe type of "filteredList" should be an interface such as "List" rather than the implementation "ArrayList".(‚Ï°b8“±ƒßÜ1
+E
+java:S1604a"(Make this anonymous inner class a lambda(‹÷Ë×8”±ƒßÜ1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ8Úú…®Ü1
+e
+java:S2583D"CChange this condition so that it does not always evaluate to "true"(½õ¸†ÿÿÿÿÿ8¨²ƒßÜ1

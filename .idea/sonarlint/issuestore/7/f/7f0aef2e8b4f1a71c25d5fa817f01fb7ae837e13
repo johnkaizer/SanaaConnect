@@ -1,0 +1,10 @@
+
+J
+java:S1604c"(Make this anonymous inner class a lambda(‰¢©öÿÿÿÿÿ8‰¸²İ1
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ
+e
+java:S2583F"CChange this condition so that it does not always evaluate to "true"(½õ¸†ÿÿÿÿÿ8•é²İ1
+t
+java:S37761"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¬‚çÃıÿÿÿÿ8ŠŞÃ²İ1
+j
+java:S1659"LDeclare "textViewContent" and all following declarations on a separate line.(ÇçÏ’8Ğé²İ1

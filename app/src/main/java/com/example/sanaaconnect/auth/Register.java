@@ -118,10 +118,24 @@ public class Register extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
                                     // Sign in success
-                                    Toast.makeText(Register.this, "User registration successful", Toast.LENGTH_SHORT).show();
+                                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                                    if (currentUser != null) {
+                                        currentUser.sendEmailVerification()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            // Verification email sent
+                                                            Toast.makeText(Register.this, "User registration successful. Verification email sent. Please verify your email address.", Toast.LENGTH_LONG).show();
+                                                        } else {
+                                                            // Failed to send verification email
+                                                            Toast.makeText(Register.this, "Failed to send verification email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+                                    }
 
                                     // Save additional user details to Firebase Realtime Database
-                                    FirebaseUser currentUser = mAuth.getCurrentUser();
                                     if (currentUser != null) {
                                         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -129,14 +143,10 @@ public class Register extends AppCompatActivity {
                                         String userId = usersRef.push().getKey();
 
                                         // Create a User object with the provided details
-                                        Users newUser = new Users(userId,fullName, email, phoneNumber, password, role);
+                                        Users newUser = new Users(userId, fullName, email, phoneNumber, password, role);
 
                                         // Save user details to the database
                                         usersRef.child(currentUser.getUid()).setValue(newUser);
-
-                                        // Navigate to the sign-in activity
-                                        Intent intent = new Intent(Register.this, Login.class);
-                                        startActivity(intent);
                                         finish();
                                     }
                                 } else {
@@ -147,7 +157,7 @@ public class Register extends AppCompatActivity {
                         });
             }
         });
-        
+
     }
 
     public boolean isInternetConnected() {

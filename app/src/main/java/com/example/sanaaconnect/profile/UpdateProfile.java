@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.sanaaconnect.auth.ChangePassword;
 import com.example.sanaaconnect.R;
+import com.example.sanaaconnect.models.Users;
 import com.example.sanaaconnect.utils.ReadWriteUserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -225,19 +226,19 @@ public class UpdateProfile extends AppCompatActivity {
         String userIDofRegistered = firebaseUser.getUid();
 
         //Extracting user reference from Database for "Registered users"
-        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
+        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
 
         progressBar.setVisibility(View.VISIBLE);
 
         referenceProfile.child(userIDofRegistered).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ReadWriteUserDetails readUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
+                Users readUserDetails = snapshot.getValue(Users.class);
                 if (readUserDetails != null) {
                     textFullName = firebaseUser.getDisplayName();
-                    textDoB = readUserDetails.doB;
-                    textGender = readUserDetails.gender;
-                    textMobile = readUserDetails.mobile;
+                    textDoB = readUserDetails.getRole();
+                    textGender = readUserDetails.getRole();
+                    textMobile = readUserDetails.getEmail();
 
                     editTextUpdateName.setText(textFullName);
                     editTextUpdateDoB.setText(textDoB);

@@ -1,5 +1,8 @@
 package com.example.sanaaconnect.profile;
 
+import static com.example.sanaaconnect.constants.Constants.getUserFullName;
+import static com.example.sanaaconnect.constants.Constants.getUserUid;
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.sanaaconnect.auth.ChangePassword;
 import com.example.sanaaconnect.R;
+import com.example.sanaaconnect.models.Users;
 import com.example.sanaaconnect.utils.ReadWriteUserDetails;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,9 +52,6 @@ public class CreatorProfile extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Your Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
         swipeToRefresh();
 
         textViewWelcome = findViewById(R.id.textView_show_welcome);
@@ -132,17 +133,17 @@ public class CreatorProfile extends AppCompatActivity {
         String userID = firebaseUser.getUid();
 
         //Extracting User Reference from Database for "Registered Users"
-        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
+        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
         referenceProfile.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ReadWriteUserDetails readUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
+                Users readUserDetails = snapshot.getValue(Users.class);
                 if (readUserDetails != null){
-                    fullName = firebaseUser.getDisplayName();
-                    email = firebaseUser.getEmail();
-                    doB = readUserDetails.doB;
-                    gender = readUserDetails.gender;
-                    mobile = readUserDetails.mobile;
+                    fullName =readUserDetails.getFullName() ;
+                    email = readUserDetails.getEmail();
+                    doB = readUserDetails.getRole();
+                    gender = readUserDetails.getRole();
+                    mobile = readUserDetails.getPhoneNumber();
 
                     textViewWelcome.setText(getString(R.string.welcome_head_profile, fullName));
                     textViewFullName.setText(fullName);

@@ -108,15 +108,12 @@ public class Login extends AppCompatActivity {
                 if(TextUtils.isEmpty(email)){
                     editTextLoginEmail.setError("Email is required!");
                     editTextLoginEmail.requestFocus();
-                    return;
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     editTextLoginEmail.setError("Valid email is required!");
                     editTextLoginEmail.requestFocus();
-                    return;
                 } else if (TextUtils.isEmpty(password)){
                     editTextLoginPwd.setError("Password is required!");
                     editTextLoginPwd.requestFocus();
-                    return;
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
                     loginUser(email, password);
@@ -132,7 +129,7 @@ public class Login extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()){
                     FirebaseUser firebaseUser = authProfile.getCurrentUser();
-                    if (firebaseUser != null) {
+                    if (firebaseUser != null && firebaseUser.isEmailVerified()) {
                         String userId = firebaseUser.getUid();
                         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -158,11 +155,18 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+                    } else {
+                        // Email is not verified, prompt the user to verify the email
+                        Toast.makeText(Login.this, "Please verify your email address before logging in", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    // Handle login failure
+                    Toast.makeText(Login.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
 
     @Override
     protected void onStart() {
