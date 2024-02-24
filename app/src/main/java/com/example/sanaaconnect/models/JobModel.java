@@ -7,17 +7,19 @@ public class JobModel {
     String amount;
     String postDate;
     String deadlineDate;
+    String email;
 
     public JobModel() {
     }
 
-    public JobModel(String clientId, String jobTitle, String description, String amount, String postDate, String deadlineDate) {
+    public JobModel(String clientId, String jobTitle, String description, String amount, String postDate, String deadlineDate, String email) {
         this.clientId = clientId;
         this.jobTitle = jobTitle;
         this.description = description;
         this.amount = amount;
         this.postDate = postDate;
         this.deadlineDate = deadlineDate;
+        this.email = email;
     }
 
     public String getClientId() {
@@ -65,5 +67,12 @@ public class JobModel {
     }
     public void setDeadlineDate(String deadlineDate) {
         this.deadlineDate = deadlineDate;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

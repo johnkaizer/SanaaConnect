@@ -108,5 +108,26 @@
         app:layout_constraintTop_toTopOf="@+id/experienceTextView"
         tools:text="Deadline" />
 
+    <TextView
+        android:id="@+id/sendMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="email"
+        android:clickable="true"
+        android:onClick="sendEmail"
+        android:padding="10dp"
+        android:text="Send an Email"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/experienceTextView"
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
+    <Button
+        android:id="@+id/chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Start chat"
+        app:layout_constraintStart_toStartOf="@+id/sendMail"
+        app:layout_constraintTop_toBottomOf="@+id/sendMail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

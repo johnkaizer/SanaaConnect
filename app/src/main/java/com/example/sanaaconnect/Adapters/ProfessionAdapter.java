@@ -75,6 +75,7 @@ public class ProfessionAdapter extends RecyclerView.Adapter<ProfessionAdapter.Vi
                 intent.putExtra("education", professionModel.getEducation());
                 intent.putExtra("location", professionModel.getLocation());
                 intent.putExtra("experience", professionModel.getExperience());
+                intent.putExtra("jobClientId", professionModel.getProffId());
 
                 // Start the ProfileDetails activity
                 context.startActivity(intent);

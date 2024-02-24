@@ -24,19 +24,25 @@
         <activity
             android:name=".activities.ProfileDetailsActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"/>
+            android:theme="@style/Theme.SanaaConnect.NoActionBar"/>
         <activity
             android:name=".activities.JobDetailsActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"/>
+            android:theme="@style/Theme.SanaaConnect.NoActionBar"/>
         <activity
             android:name=".activities.AddSkillProfileActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"/>
+            android:theme="@style/Theme.SanaaConnect.NoActionBar"/>
         <activity
             android:name=".activities.HomeDashActivity"
             android:exported="true"
-            android:theme="@style/Theme.SanaaConnect.NoActionBar" />
+            android:theme="@style/Theme.SanaaConnect.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".profile.DeleteProfile"
             android:exported="false"
@@ -120,11 +126,7 @@
             android:name=".activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data

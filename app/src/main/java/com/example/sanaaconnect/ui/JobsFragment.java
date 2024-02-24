@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sanaaconnect.Adapters.JobAdapter;
 import com.example.sanaaconnect.Adapters.JobManagementAdapter;
 import com.example.sanaaconnect.R;
+import com.example.sanaaconnect.constants.Constants;
 import com.example.sanaaconnect.databinding.FragmentJobsBinding;
 import com.example.sanaaconnect.models.JobModel;
 import com.google.firebase.database.DataSnapshot;
@@ -112,6 +113,7 @@ public class JobsFragment extends Fragment {
                         String Desc = description.getText().toString();
                         String amount = salary.getText().toString();
                         String Deadline = deadline.getText().toString();
+                        String email = Constants.getUserEmail();
 
                         // Check if any of the fields are empty
                         if (TextUtils.isEmpty(Title) || TextUtils.isEmpty(Desc) || TextUtils.isEmpty(amount) || TextUtils.isEmpty(Deadline)) {
@@ -128,7 +130,7 @@ public class JobsFragment extends Fragment {
                         String postDate = sdf.format(new Date());
 
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Jobs");
-                        JobModel jobModel = new JobModel(clientId, Title, Desc, amount, postDate, Deadline);
+                        JobModel jobModel = new JobModel(clientId, Title, Desc, amount, postDate, Deadline,email);
                         databaseReference.child(Title).setValue(jobModel);
 
                         Toast.makeText(getContext(), "Data saved ", Toast.LENGTH_SHORT).show();

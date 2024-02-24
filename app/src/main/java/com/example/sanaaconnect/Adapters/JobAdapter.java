@@ -104,6 +104,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
                 intent.putExtra("jobDescription", jobModel.getDescription());
                 intent.putExtra("jobPostDate", jobModel.getPostDate());
                 intent.putExtra("jobDeadline", jobModel.getDeadlineDate());
+                intent.putExtra("userEmail", jobModel.getEmail());
                 intent.putExtra("jobClientId", jobModel.getClientId());
                 context.startActivity(intent);
             }

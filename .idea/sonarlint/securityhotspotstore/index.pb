@@ -270,3 +270,5 @@ Mapp/src/main/java/com/example/sanaaconnect/activities/JobDetailsActivity.java,
 Qapp/src/main/java/com/example/sanaaconnect/activities/ProfileDetailsActivity.java,d\3\d35b938e04a0193eebf44228b2ed22989aab9353
 u
 Eapp/src/main/java/com/example/sanaaconnect/Adapters/UsersAdapter.java,c\3\c3db05e0463a02984f0da92a77c1216d7c861af0
+v
+Fapp/src/main/java/com/example/sanaaconnect/Adapters/ReviewAdapter.java,7\f\7f0aef2e8b4f1a71c25d5fa817f01fb7ae837e13
