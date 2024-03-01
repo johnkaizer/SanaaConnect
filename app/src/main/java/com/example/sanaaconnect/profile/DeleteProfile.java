@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sanaaconnect.activities.PortfolioActivity;
 import com.example.sanaaconnect.auth.ChangePassword;
 import com.example.sanaaconnect.activities.MainActivity;
 import com.example.sanaaconnect.R;
@@ -262,7 +263,10 @@ public class DeleteProfile extends AppCompatActivity {
         } else if (id == R.id.menu_update_profile) {
             Intent intent = new Intent(DeleteProfile.this, UpdateProfile.class);
             startActivity(intent);
-            finish();
+
+        } else if (id == R.id.menu_portfolio) {
+            Intent intent = new Intent(DeleteProfile.this, PortfolioActivity.class);
+            startActivity(intent);
 
         }else if (id == R.id.menu_update_email) {
             Intent intent = new Intent(DeleteProfile.this, UpdateEmail.class);
@@ -270,11 +274,9 @@ public class DeleteProfile extends AppCompatActivity {
         } else if (id == R.id.menu_change_password) {
             Intent intent = new Intent(DeleteProfile.this, ChangePassword.class);
             startActivity(intent);
-            finish();
         } else if (id == R.id.menu_delete_profile) {
             Intent intent = new Intent(DeleteProfile.this, DeleteProfile.class);
             startActivity(intent);
-            finish();
         }else {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
 

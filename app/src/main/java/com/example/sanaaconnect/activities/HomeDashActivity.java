@@ -130,7 +130,9 @@ public class HomeDashActivity extends AppCompatActivity {
             startActivity(intent);
 
         } else if (id == R.id.action_logout){
-            authProfile.signOut();
+            editor.clear();
+            editor.commit();
+            FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Logged Out", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(HomeDashActivity.this, MainActivity.class);
 

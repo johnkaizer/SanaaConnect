@@ -1,0 +1,8 @@
+
+w
+java:S1104L"UMake imageView a static final constant or non-public and provide accessors if needed.(…Çªúÿÿÿÿ8ØÏäİß1
+x
+java:S1104M"VMake timesStamp a static final constant or non-public and provide accessors if needed.(ù˜’éùÿÿÿÿ8ØÏäİß1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ8ÚÏäİß1
+G
+java:S1068"+Remove this unused "context" private field.(êİç8…Ğäİß1

@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sanaaconnect.activities.PortfolioActivity;
 import com.example.sanaaconnect.auth.ChangePassword;
 import com.example.sanaaconnect.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -229,13 +230,15 @@ public class UpdateEmail extends AppCompatActivity {
         } else if (id == R.id.menu_refresh) {
             //refresh activity
             startActivity(getIntent());
-            finish();
             overridePendingTransition(0, 0);
+
+        }else if (id == R.id.menu_portfolio) {
+            Intent intent = new Intent(UpdateEmail.this, PortfolioActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.menu_update_profile) {
             Intent intent = new Intent(UpdateEmail.this, UpdateProfile.class);
             startActivity(intent);
-            finish();
 
         } else if (id == R.id.menu_update_email) {
             // Already in the update email activity, no need to start it again
@@ -245,12 +248,9 @@ public class UpdateEmail extends AppCompatActivity {
         } else if (id == R.id.menu_change_password) {
             Intent intent = new Intent(UpdateEmail.this, ChangePassword.class);
             startActivity(intent);
-            finish();
-
         } else if (id == R.id.menu_delete_profile) {
             Intent intent = new Intent(UpdateEmail.this, DeleteProfile.class);
             startActivity(intent);
-            finish();
 
         } else {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();

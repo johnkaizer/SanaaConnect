@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.activities.HomeDashActivity;
+import com.example.sanaaconnect.constants.Constants;
 import com.example.sanaaconnect.databinding.ActivityRegisterBinding;
 import com.example.sanaaconnect.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +37,8 @@ public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText editTextName, editTextEmail, editTextPhone, editTextPassword;
     private ProgressBar progressBar;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class Register extends AppCompatActivity {
         editTextPhone = findViewById(R.id.editText_register_mobile);
         editTextPassword = findViewById(R.id.editText_register_password);
         progressBar = findViewById(R.id.progressBar);
+        preferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        editor = preferences.edit();
 
         //Spinners
         spinner = findViewById(R.id.role_spinner);
@@ -125,6 +131,9 @@ public class Register extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()) {
+                                                            editor.clear();
+                                                            editor.commit();
+                                                            FirebaseAuth.getInstance().signOut();
                                                             // Verification email sent
                                                             Toast.makeText(Register.this, "User registration successful. Verification email sent. Please verify your email address.", Toast.LENGTH_LONG).show();
                                                         } else {

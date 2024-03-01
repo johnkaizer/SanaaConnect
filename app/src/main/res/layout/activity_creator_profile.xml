@@ -180,46 +180,10 @@
                 </RelativeLayout>
 
                 <View
-                    android:id="@+id/divider_dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/RL_dob"
-                    android:background="@android:color/darker_gray"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/RL_gender"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_below="@id/divider_dob">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:id="@+id/ic_gender"
-                        android:contentDescription="gender"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/ic_gender"/>
-
-                    <TextView
-                        android:id="@+id/textView_show_gender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/ic_gender"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginTop="20dp"
-                        android:textColor="@color/black"
-                        android:hint="loading" />
-                </RelativeLayout>
-
-                <View
                     android:id="@+id/divider_gender"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_below="@id/RL_gender"
+                    android:layout_below="@id/RL_dob"
                     android:background="@android:color/darker_gray"/>
 
                 <RelativeLayout

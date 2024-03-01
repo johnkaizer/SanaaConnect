@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.sanaaconnect.activities.PortfolioActivity;
 import com.example.sanaaconnect.auth.ChangePassword;
 import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.models.Users;
@@ -37,7 +38,7 @@ import java.util.Objects;
 
 public class CreatorProfile extends AppCompatActivity {
 
-    private TextView textViewWelcome, textViewFullName, textViewEmail, textViewDoB, textViewGender, textViewMobile;
+    private TextView textViewWelcome, textViewFullName, textViewEmail, textViewDoB, textViewMobile;
     private ProgressBar progressBar;
     private String fullName, email, doB, gender, mobile;
     private ImageView imageview;
@@ -58,7 +59,6 @@ public class CreatorProfile extends AppCompatActivity {
         textViewFullName = findViewById(R.id.textView_show_full_name);
         textViewEmail = findViewById(R.id.textView_show_email);
         textViewDoB = findViewById(R.id.textView_show_dob);
-        textViewGender = findViewById(R.id.textView_show_gender);
         textViewMobile = findViewById(R.id.textView_show_mobile);
         progressBar = findViewById(R.id.progress_bar);
 
@@ -149,7 +149,6 @@ public class CreatorProfile extends AppCompatActivity {
                     textViewFullName.setText(fullName);
                     textViewEmail.setText(email);
                     textViewDoB.setText(doB);
-                    textViewGender.setText(gender);
                     textViewMobile.setText(mobile);
 
                     //Set user dp (after upload)
@@ -193,23 +192,23 @@ public class CreatorProfile extends AppCompatActivity {
         } else if (id == R.id.menu_refresh){
             //refresh activity
             startActivity(getIntent());
-            finish();
             overridePendingTransition(0,0);
             
         } else if (id == R.id.menu_update_profile) {
             Intent intent = new Intent(CreatorProfile.this, UpdateProfile.class);
             startActivity(intent);
-            finish();
 
-        } else if (id == R.id.menu_update_email) {
+        } else if (id == R.id.menu_portfolio) {
+            Intent intent = new Intent(CreatorProfile.this, PortfolioActivity.class);
+            startActivity(intent);
+
+        }else if (id == R.id.menu_update_email) {
             Intent intent = new Intent(CreatorProfile.this, UpdateEmail.class);
             startActivity(intent);
-            finish();
 
         } else if (id == R.id.menu_change_password) {
             Intent intent = new Intent(CreatorProfile.this, ChangePassword.class);
             startActivity(intent);
-            finish();
 
         } else if (id == R.id.menu_delete_profile) {
             Intent intent = new Intent(CreatorProfile.this, DeleteProfile.class);
