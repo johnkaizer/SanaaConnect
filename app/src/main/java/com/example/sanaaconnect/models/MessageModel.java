@@ -2,20 +2,22 @@ package com.example.sanaaconnect.models;
 
 public class MessageModel {
     String messageId;
-    String clientId;
-    String creativesId;
+    String recieverId;
+    String senderId;
     String content;
     String date;
+    String userName;
 
     public MessageModel() {
     }
 
-    public MessageModel(String messageId, String clientId, String creativesId, String content, String date) {
+    public MessageModel(String messageId, String recieverId, String senderId, String content, String date, String userName) {
         this.messageId = messageId;
-        this.clientId = clientId;
-        this.creativesId = creativesId;
+        this.recieverId = recieverId;
+        this.senderId = senderId;
         this.content = content;
         this.date = date;
+        this.userName = userName;
     }
 
     public String getMessageId() {
@@ -26,20 +28,20 @@ public class MessageModel {
         this.messageId = messageId;
     }
 
-    public String getClientId() {
-        return clientId;
+    public String getRecieverId() {
+        return recieverId;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setRecieverId(String recieverId) {
+        this.recieverId = recieverId;
     }
 
-    public String getCreativesId() {
-        return creativesId;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setCreativesId(String creativesId) {
-        this.creativesId = creativesId;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
     public String getContent() {
@@ -56,5 +58,13 @@ public class MessageModel {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

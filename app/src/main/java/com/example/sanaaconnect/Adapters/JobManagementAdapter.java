@@ -1,11 +1,18 @@
 package com.example.sanaaconnect.Adapters;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +22,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sanaaconnect.R;
+import com.example.sanaaconnect.constants.Constants;
 import com.example.sanaaconnect.models.JobModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +42,7 @@ import java.util.concurrent.TimeUnit;
 public class JobManagementAdapter extends RecyclerView.Adapter<JobManagementAdapter.ViewHolder> {
     List<JobModel>jobList;
     Context context;
+    private ProgressDialog progressDialog;
 
     public JobManagementAdapter(List<JobModel> jobList, Context context) {
         this.jobList = jobList;
@@ -161,7 +171,102 @@ public class JobManagementAdapter extends RecyclerView.Adapter<JobManagementAdap
 
 
     private void editJob(JobModel jobModel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.edit_job, null);
+
+        EditText title = dialogView.findViewById(R.id.idEdTitle);
+        EditText description = dialogView.findViewById(R.id.idEdDesc);
+        EditText salary = dialogView.findViewById(R.id.idEdAmount);
+        EditText deadline = dialogView.findViewById(R.id.idDeadline);
+
+        // Pre-populate fields with existing job data
+        title.setText(jobModel.getJobTitle());
+        description.setText(jobModel.getDescription());
+        salary.setText(String.valueOf(jobModel.getAmount()));
+        deadline.setText(jobModel.getDeadlineDate());
+
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+
+        // Set OnClickListener for pickDateButton to show date picker
+        deadline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Initialize Calendar instance
+                final Calendar calendar = Calendar.getInstance();
+
+                // Create DatePickerDialog with the current date
+                DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                // Set the chosen date on EditText
+                                String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                                deadline.setText(selectedDate);
+                            }
+                        },
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH));
+
+                // Show the DatePickerDialog
+                datePickerDialog.show();
+            }
+        });
+
+        dialogView.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Title = title.getText().toString();
+                String Desc = description.getText().toString();
+                String amount = salary.getText().toString();
+                String Deadline = deadline.getText().toString();
+                String email = Constants.getUserEmail();
+                progressDialog = new ProgressDialog(context);
+                progressDialog.setMessage("Uploading data...");
+                progressDialog.setCancelable(false);
+
+                // Check if any of the fields are empty
+                if (TextUtils.isEmpty(Title) || TextUtils.isEmpty(Desc) || TextUtils.isEmpty(amount) || TextUtils.isEmpty(Deadline)) {
+                    Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Retrieve clientId from SharedPreferences
+                SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                String clientId = preferences.getString("clientId", "");
+
+                // Generate postDate in the required format
+                SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd h:mma", Locale.getDefault());
+                String postDate = sdf.format(new Date());
+
+                // Update the existing job entry
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(jobModel.getJobTitle());
+                JobModel updatedJobModel = new JobModel(clientId, Title, Desc, amount, postDate, Deadline, email);
+                databaseReference.setValue(updatedJobModel);
+
+                Toast.makeText(context, "Job updated successfully", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+                // Dismiss the dialog
+                dialog.dismiss();
+            }
+        });
+
+        dialogView.findViewById(R.id.cancelButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dismiss the dialog
+                dialog.dismiss();
+            }
+        });
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        dialog.show();
     }
+
 
     @Override
     public int getItemCount() {

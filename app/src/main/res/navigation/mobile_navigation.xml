@@ -10,6 +10,16 @@
         android:name="com.example.sanaaconnect.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_home_client"
+        android:name="com.example.sanaaconnect.ui.HomeClientFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home_client" />
+    <fragment
+        android:id="@+id/nav_home_prof"
+        android:name="com.example.sanaaconnect.ui.HomeProffFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home_proff" />
 
     <fragment
         android:id="@+id/nav_messages"

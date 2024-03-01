@@ -1,20 +1,33 @@
 
 ˆ
-java:S1319*"lThe type of "filteredList" should be an interface such as "List" rather than the implementation "ArrayList".(‚Ï°b8°ÔçØÜ1
+java:S13194"lThe type of "filteredList" should be an interface such as "List" rather than the implementation "ArrayList".(‚Ï°b8ÍàÉŞ1
+s	java:S117Ü"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—úşšùÿÿÿÿ8œş¶ÉŞ1
+n	java:S117İ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òÊªÁ8ş¶ÉŞ1
+n	java:S117ß"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’°Ô8ş¶ÉŞ1
 E
-java:S1604@"(Make this anonymous inner class a lambda(»ä”ö8±ÔçØÜ1
+java:S1604J"(Make this anonymous inner class a lambda(»ä”ö8ĞàÉŞ1
 E
-java:S1604;"(Make this anonymous inner class a lambda(‹÷Ë×8±ÔçØÜ1
+java:S1604E"(Make this anonymous inner class a lambda(‹÷Ë×8ÑàÉŞ1
 K
-java:S1604"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8±ÔçØÜ1
+java:S1604˜"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8ÑàÉŞ1
 K
-java:S1604•"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8±ÔçØÜ1
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ8³ÔçØÜ1
+java:S1604Ÿ"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8ÑàÉŞ1
+F
+java:S1604È"(Make this anonymous inner class a lambda(ÌÜİ‚8¢ş¶ÉŞ1
+K
+java:S1604À"(Make this anonymous inner class a lambda(÷øŞ¯ıÿÿÿÿ8±ş¶ÉŞ1
+F
+java:S1604Ù"(Make this anonymous inner class a lambda(ĞÍÉ¨8²ş¶ÉŞ1
+K
+java:S1604€"(Make this anonymous inner class a lambda(¼ó÷Çøÿÿÿÿ8´ş¶ÉŞ1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ8İàÉŞ1
 e
-java:S2583d"CChange this condition so that it does not always evaluate to "true"(½õ¸†ÿÿÿÿÿ8•ÕçØÜ1
-¤
-java:S1186£"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÅÌõÑûÿÿÿÿ8•ÕçØÜ1
+java:S2583n"CChange this condition so that it does not always evaluate to "true"(½õ¸†ÿÿÿÿÿ8„âÉŞ1
+X
+java:S1874-"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ8ë¹ÉŞ1
 t
-java:S37766"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(…ö¢¹şÿÿÿÿ8¦ÕçØÜ1
-R
-java:S1172£"/Remove this unused method parameter "jobModel".(ÅÌõÑûÿÿÿÿ8¹ÕçØÜ1
+java:S3776@"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(…ö¢¹şÿÿÿÿ8·âÉŞ1
+Y
+java:S1874á"6Remove this use of "ProgressDialog"; it is deprecated.(ğíµüÿÿÿÿ8‹¤½ÉŞ1
+U
+java:S1874â"2Remove this use of "setMessage"; it is deprecated.(ÁÜ£åşÿÿÿÿ8Ô»ÉŞ1

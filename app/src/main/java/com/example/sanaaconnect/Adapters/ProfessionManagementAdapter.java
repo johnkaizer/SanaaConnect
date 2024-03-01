@@ -1,13 +1,19 @@
 package com.example.sanaaconnect.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -149,7 +155,125 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
 
 
     private void editProff(ProfessionModel professionModel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.edit_proffesion, null);
+
+        EditText fullName = dialogView.findViewById(R.id.fullName);
+        Spinner titleSpinner = dialogView.findViewById(R.id.profession_spinner);
+        EditText charges = dialogView.findViewById(R.id.charges);
+        Spinner experienceSpinner = dialogView.findViewById(R.id.experience_spinner);
+        Spinner educationSpinner = dialogView.findViewById(R.id.education_spinner);
+        EditText location = dialogView.findViewById(R.id.location);
+
+        // Populate fields with existing profession data
+        fullName.setText(professionModel.getFullName());
+        charges.setText(professionModel.getCharges());
+        location.setText(professionModel.getLocation());
+
+        // Set up adapters for spinners
+        ArrayAdapter<CharSequence> titleAdapter = ArrayAdapter.createFromResource(context,
+                R.array.professional_titles, android.R.layout.simple_spinner_item);
+        titleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        titleSpinner.setAdapter(titleAdapter);
+
+        ArrayAdapter<CharSequence> experienceAdapter = ArrayAdapter.createFromResource(context,
+                R.array.experience_levels, android.R.layout.simple_spinner_item);
+        experienceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        experienceSpinner.setAdapter(experienceAdapter);
+
+        ArrayAdapter<CharSequence> educationAdapter = ArrayAdapter.createFromResource(context,
+                R.array.education_levels, android.R.layout.simple_spinner_item);
+        educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        educationSpinner.setAdapter(educationAdapter);
+
+        // Set selected values for spinners
+        String selectedTitle = professionModel.getTitle();
+        if (selectedTitle != null) {
+            int titlePosition = titleAdapter.getPosition(selectedTitle);
+            if (titlePosition != -1) {
+                titleSpinner.setSelection(titlePosition);
+            }
+        }
+
+        String selectedExperience = professionModel.getExperience();
+        if (selectedExperience != null) {
+            int experiencePosition = experienceAdapter.getPosition(selectedExperience);
+            if (experiencePosition != -1) {
+                experienceSpinner.setSelection(experiencePosition);
+            }
+        }
+
+        String selectedEducation = professionModel.getEducation();
+        if (selectedEducation != null) {
+            int educationPosition = educationAdapter.getPosition(selectedEducation);
+            if (educationPosition != -1) {
+                educationSpinner.setSelection(educationPosition);
+            }
+        }
+
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+
+        dialogView.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String FullName = fullName.getText().toString();
+                String Title = titleSpinner.getSelectedItem().toString();
+                String Charges = charges.getText().toString();
+                String Experience = experienceSpinner.getSelectedItem().toString();
+                String Education = educationSpinner.getSelectedItem().toString();
+                String Location = location.getText().toString();
+                // Retrieve email, phone and ImageUrl from the existing professionModel
+                String email = professionModel.getEmail();
+                String phone = professionModel.getPhone();
+                String imageUrl = professionModel.getImageUrl();
+
+                // Check if any of the fields are empty
+                if (TextUtils.isEmpty(FullName) || TextUtils.isEmpty(Charges) || TextUtils.isEmpty(Location) ) {
+                    Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Retrieve clientId from SharedPreferences
+                SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                String clientId = preferences.getString("clientId", "");
+
+                // Update the existing profession profile entry
+                DatabaseReference professionProfileRef = FirebaseDatabase.getInstance().getReference().child("SkillsProfile").child(professionModel.getProffId());
+                ProfessionModel updatedProfessionModel = new ProfessionModel(clientId, FullName, Title, Charges,imageUrl, Experience, Education, Location,email,phone);
+                professionProfileRef.setValue(updatedProfessionModel)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Profession profile updated successfully
+                                Toast.makeText(context, "Profession profile updated successfully", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Failed to update profession profile
+                                Toast.makeText(context, "Failed to update profession profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        dialogView.findViewById(R.id.cancelButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dismiss the dialog
+                dialog.dismiss();
+            }
+        });
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        dialog.show();
     }
+
 
     @Override
     public int getItemCount() {
