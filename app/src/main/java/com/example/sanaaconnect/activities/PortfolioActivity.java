@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.sanaaconnect.Adapters.JobManagementAdapter;
@@ -47,6 +48,7 @@ public class PortfolioActivity extends AppCompatActivity {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
 
     private final ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
             uri -> {
@@ -67,6 +69,9 @@ public class PortfolioActivity extends AppCompatActivity {
         userIdentity = Constants.getUserUid(); // Ensure you have this method in your Constants class
         recyclerViewImage.setLayoutManager(new LinearLayoutManager(PortfolioActivity.this));
          portfolios = new ArrayList<>();
+        // Initialize the ProgressBar
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
         // Initialize your database reference
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Portfolios");
@@ -108,16 +113,25 @@ public class PortfolioActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void uploadImageToFirebase(Uri uri) {
+        Toast loadingToast = Toast.makeText(PortfolioActivity.this, "Uploading...", Toast.LENGTH_SHORT);
+        loadingToast.show();
+        progressBar.setVisibility(View.VISIBLE);
+
         StorageReference fileRef = storage.getReference().child("images/" + userIdentity + "/" + System.currentTimeMillis() + ".jpg");
         fileRef.putFile(uri)
                 .addOnSuccessListener(taskSnapshot -> fileRef.getDownloadUrl().addOnSuccessListener(uri1 -> {
                     String imageUrl = uri1.toString();
                     savePortfolioDetails(imageUrl);
+                    progressBar.setVisibility(View.GONE);
+                    loadingToast.cancel();
+                    Toast.makeText(PortfolioActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
                 }))
-                .addOnFailureListener(e -> Toast.makeText(PortfolioActivity.this, "Upload failed: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show());
+                .addOnFailureListener(e -> {
+                    progressBar.setVisibility(View.GONE);
+                    loadingToast.cancel();
+                    Toast.makeText(PortfolioActivity.this, "Upload failed: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                });
     }
 
     private void savePortfolioDetails(String imageUrl) {

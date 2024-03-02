@@ -40,7 +40,7 @@ public class CreatorProfile extends AppCompatActivity {
 
     private TextView textViewWelcome, textViewFullName, textViewEmail, textViewDoB, textViewMobile;
     private ProgressBar progressBar;
-    private String fullName, email, doB, gender, mobile;
+    private String fullName, email, doB, mobile;
     private ImageView imageview;
     private FirebaseAuth authProfile;
     private SwipeRefreshLayout swipeContainer;
@@ -142,7 +142,6 @@ public class CreatorProfile extends AppCompatActivity {
                     fullName =readUserDetails.getFullName() ;
                     email = readUserDetails.getEmail();
                     doB = readUserDetails.getRole();
-                    gender = readUserDetails.getRole();
                     mobile = readUserDetails.getPhoneNumber();
 
                     textViewWelcome.setText(getString(R.string.welcome_head_profile, fullName));

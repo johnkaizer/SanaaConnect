@@ -2,14 +2,17 @@ package com.example.sanaaconnect.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,19 +28,22 @@ import com.example.sanaaconnect.Adapters.CategoryAdapter;
 import com.example.sanaaconnect.Adapters.JobAdapter;
 import com.example.sanaaconnect.Adapters.ProfessionAdapter;
 import com.example.sanaaconnect.R;
+import com.example.sanaaconnect.constants.Constants;
 import com.example.sanaaconnect.databinding.FragmentHomeBinding;
 import com.example.sanaaconnect.models.CategoryModel;
 import com.example.sanaaconnect.models.JobModel;
 import com.example.sanaaconnect.models.ProfessionModel;
+import com.example.sanaaconnect.models.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClickListener {
+public class HomeFragment extends Fragment  {
 
     private FragmentHomeBinding binding;
     //Professionals
@@ -48,15 +54,19 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClic
     ArrayList<JobModel> jobList;
     JobAdapter jobAdapter;
 
-    //Categories
-    ArrayList<CategoryModel> categoryModels;
-    CategoryAdapter categoryAdapter;
     EditText searchEd;
     private ProgressBar loadingProgressBar;
     RecyclerView homeRec;
     Query databaseReference;
 
-    RecyclerView categoryRV;
+    Button jobsBtn;
+    Button proffesionalBtn;
+    // User roles
+    private static final String ROLE_ADMIN = "Admin";
+    private static final String ROLE_CLIENT = "Client";
+    private static final String ROLE_PROFESSIONAL = "Professional";
+
+    String userIdentity;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,37 +74,27 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClic
         View root = binding.getRoot();
 
         homeRec = root.findViewById(R.id.notRec);
+        proffesionalBtn = root.findViewById(R.id.button_proffesionals);
+        jobsBtn = root.findViewById(R.id.button_jobs);
         searchEd = root.findViewById(R.id.search_Txt);
+        userIdentity = Constants.getUserUid();
+        getUserRole();
         //Items category headers
-        categoryRV = root.findViewById(R.id.catRv);
-        categoryModels = new ArrayList<>();
-        categoryModels.add(new CategoryModel("Job Listings"));
-        categoryModels.add(new CategoryModel("Professionals"));
-
-        categoryAdapter = new CategoryAdapter(getActivity(), categoryModels, this);
-        categoryRV.setAdapter(categoryAdapter);
-        categoryRV.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-        categoryRV.setNestedScrollingEnabled(false);
-        // Find the index of the "Donations" category
-        int donationsIndex = -1;
-        for (int i = 0; i < categoryModels.size(); i++) {
-            if (categoryModels.get(i).getHeader().equals("Job Listings")) {
-                donationsIndex = i;
-                break;
+        proffesionalBtn.setOnClickListener(v -> {
+            if (isInternetAvailable()) {
+                getProfessionals();
+            } else {
+                Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
             }
-        }
+        });
 
-        // Set the "Jobs" category as selected by default
-        categoryAdapter.setSelectedItem(donationsIndex);
-
-        // Trigger the initial retrieval of donations
-        if (isInternetAvailable()) {
-            // Internet is available, proceed with database calls
-            getJobs();
-        } else {
-
-            Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
-        }
+        jobsBtn.setOnClickListener(v -> {
+            if (isInternetAvailable()) {
+                getJobs();
+            } else {
+                Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+            }
+        });
         searchEd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -156,13 +156,12 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClic
     }
 
     private void performSearch(String query) {
-        int selectedItem = categoryAdapter.getSelectedItem();
-        if (selectedItem == 0) {
+        // Assuming jobs are displayed by default or last selected by the jobsBtn
+        if (jobList != null && !jobList.isEmpty()) {
             filterJobs(query);
-        } else if (selectedItem == 1) {
+        } else if (professionList != null && !professionList.isEmpty()) {
             filterProfesionals(query);
         }
-
     }
 
     @Override
@@ -175,26 +174,6 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClic
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
-    }
-
-    @Override
-    public void onItemClick(CategoryModel category) {
-        String categoryName = category.getHeader();
-        if (isInternetAvailable()) {
-            switch (categoryName) {
-                case "Job Listings":
-                    getJobs();
-                    break;
-                case "Professionals":
-                    getProfessionals();
-                    break;
-                default:
-                    // Handle unsupported category
-                    break;
-            }
-        } else {
-            Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void getJobs() {
@@ -301,23 +280,42 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnItemClic
     @Override
     public void onResume() {
         super.onResume();
-        // Check if internet is available
-        if (isInternetAvailable()) {
-            int selectedItem = categoryAdapter.getSelectedItem();
-            switch (selectedItem) {
-                case 0: // Jobs
-                    getJobs();
-                    break;
-                case 1: // Professionals
-                    getProfessionals();
-                    break;
-            }
-        } else {
-            // Internet is not available, show the error animation and hide the RecyclerView
-            homeRec.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
-        }
+        getUserRole();
     }
 
+    private void getUserRole() {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userIdentity);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Users user = snapshot.getValue(Users.class);
+                    String userRole = user.getRole();
+                    // Hide buttons based on user role
+                    if (userRole.equals(ROLE_ADMIN)) {
+                        jobsBtn.setVisibility(View.VISIBLE);
+                        proffesionalBtn.setVisibility(View.VISIBLE);
+                        getJobs();
+                        getProfessionals();
+                    } else if (userRole.equals(ROLE_CLIENT)) {
+                        jobsBtn.setVisibility(View.GONE);
+                        proffesionalBtn.setVisibility(View.VISIBLE);
+                        getProfessionals();
+                    } else if (userRole.equals(ROLE_PROFESSIONAL)) {
+                        jobsBtn.setVisibility(View.VISIBLE);
+                        proffesionalBtn.setVisibility(View.GONE);
+                        getJobs();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
+            }
+        });
+    }
 
 }

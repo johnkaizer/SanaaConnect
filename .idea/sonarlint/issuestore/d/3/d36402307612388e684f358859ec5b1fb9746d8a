@@ -1,16 +1,11 @@
 
 t
-java:S1192`"WDefine a constant instead of duplicating this literal "No internet connection" 4 times.(ÿÍ´ƒ8Èş ‡ß1
-j
-java:S1192G"MDefine a constant instead of duplicating this literal "Job Listings" 3 times.(ËÇàÚ8‹Õ›Ûß1
-i
-java:S1301³"KReplace this "switch" statement by "if" statements to increase readability.(¢¾§8Èş ‡ß1
+java:S1192W"WDefine a constant instead of duplicating this literal "No internet connection" 3 times.(ÿÍ´ƒ8¸ªÂòß1
 \
-java:S1161=":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8®ç…Ûß1
+java:S1161G":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8Ä¯Âòß1
 Q
-java:S1874°"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8Ïù¾Ü1
+java:S1874¯"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8Å™òß1
 Z
-java:S1874°"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8Èç…Ûß1
+java:S1874¯"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8Ş¯Âòß1
 V
-java:S1874±"3Remove this use of "isConnected"; it is deprecated.(•İºŠùÿÿÿÿ8Èç…Ûß1
-?	java:S131³""Add a default case to this switch.(¢¾§8Áÿ‡Ûß1
+java:S1874°"3Remove this use of "isConnected"; it is deprecated.(•İºŠùÿÿÿÿ8Ş¯Âòß1
