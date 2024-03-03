@@ -146,24 +146,40 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         professionModel.setEmail(email);
         professionModel.setPhone(phone);
 
-        // Save the ProfessionModel object to Firebase
-        skillsProfileRef.child(title).setValue(professionModel)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddSkillProfileActivity.this, "Skill profile added successfully", Toast.LENGTH_SHORT).show();
-                            // Clear fields or handle UI as needed
-                            fullNameEt.setText("");
-                            chargesEt.setText("");
-                            locationEt.setText("");
-                        } else {
-                            Toast.makeText(AddSkillProfileActivity.this, "Failed to add skill profile", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        // Upload image to Firebase Storage
+        uploadImageToStorage(title, new ImageUploadCallback() {
+            @Override
+            public void onImageUploadSuccess(String imageUrl) {
+                // Save the image URL to the professionModel
+                professionModel.setImageUrl(imageUrl);
+
+                // Save the ProfessionModel object to Firebase
+                skillsProfileRef.child(title).setValue(professionModel)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                progressDialog.dismiss();
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(AddSkillProfileActivity.this, "Skill profile added successfully", Toast.LENGTH_SHORT).show();
+                                    // Clear fields or handle UI as needed
+                                    fullNameEt.setText("");
+                                    chargesEt.setText("");
+                                    locationEt.setText("");
+                                } else {
+                                    Toast.makeText(AddSkillProfileActivity.this, "Failed to add skill profile", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onImageUploadFailure() {
+                progressDialog.dismiss();
+                Toast.makeText(AddSkillProfileActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
     private boolean isInternetConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -182,7 +198,7 @@ public class AddSkillProfileActivity extends AppCompatActivity {
                 byte[] data = baos.toByteArray();
 
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference()
-                        .child("product_images")
+                        .child("skills_images")
                         .child(clientId)
                         .child(productId);
 

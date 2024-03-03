@@ -102,56 +102,38 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
     }
 
     private void deleteProff(ProfessionModel professionModel) {
-        String clientId;
+        String loggedInUserId;
         // Get the currently logged-in user's ID
         SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-        clientId = preferences.getString("clientId", "");
-        String loggedInUserId = clientId;
+        loggedInUserId = preferences.getString("clientId", "");
 
-        // Retrieve the title of the profession
+        String proffId = professionModel.getProffId();
         String title = professionModel.getTitle();
 
-        // Construct the DatabaseReference to fetch the profile using the title
-        DatabaseReference skillsProfileRef = FirebaseDatabase.getInstance().getReference().child("SkillsProfile");
-        Query query = skillsProfileRef.orderByChild("title").equalTo(title);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    // Retrieve the profession model
-                    ProfessionModel profModel = dataSnapshot.getValue(ProfessionModel.class);
-                    // Check if the profile belongs to the logged-in user
-                    if (profModel != null && profModel.getProffId().equals(loggedInUserId)) {
-                        // Delete the profile
-                        dataSnapshot.getRef().removeValue()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        // Profile deleted successfully
-                                        Toast.makeText(context, "Profile deleted successfully", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        // Failed to delete the profile
-                                        Toast.makeText(context, "Failed to delete profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    } else {
-                        // If the profile does not belong to the logged-in user, show a message
-                        Toast.makeText(context, "You do not have permission to delete this profile", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(context, "Failed to fetch profile: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Check if the profile belongs to the logged-in user
+        if (proffId.equals(loggedInUserId)) {
+            DatabaseReference skillsProfileRef = FirebaseDatabase.getInstance().getReference().child("SkillsProfile").child(proffId).child(title);
+            skillsProfileRef.removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Profile deleted successfully
+                            Toast.makeText(context, "Profile deleted successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Failed to delete the profile
+                            Toast.makeText(context, "Failed to delete profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            // If the profile does not belong to the logged-in user, show a message
+            Toast.makeText(context, "You do not have permission to delete this profile", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
 
     private void editProff(ProfessionModel professionModel) {
@@ -159,7 +141,8 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
         View dialogView = LayoutInflater.from(context).inflate(R.layout.edit_proffesion, null);
 
         EditText fullName = dialogView.findViewById(R.id.fullName);
-        Spinner titleSpinner = dialogView.findViewById(R.id.profession_spinner);
+        EditText titleSpinner = dialogView.findViewById(R.id.profession1);
+        EditText emailEd = dialogView.findViewById(R.id.email1);
         EditText charges = dialogView.findViewById(R.id.charges);
         Spinner experienceSpinner = dialogView.findViewById(R.id.experience_spinner);
         Spinner educationSpinner = dialogView.findViewById(R.id.education_spinner);
@@ -169,12 +152,9 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
         fullName.setText(professionModel.getFullName());
         charges.setText(professionModel.getCharges());
         location.setText(professionModel.getLocation());
+        titleSpinner.setText(professionModel.getPhone());
+        emailEd.setText(professionModel.getEmail());
 
-        // Set up adapters for spinners
-        ArrayAdapter<CharSequence> titleAdapter = ArrayAdapter.createFromResource(context,
-                R.array.professional_titles, android.R.layout.simple_spinner_item);
-        titleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        titleSpinner.setAdapter(titleAdapter);
 
         ArrayAdapter<CharSequence> experienceAdapter = ArrayAdapter.createFromResource(context,
                 R.array.experience_levels, android.R.layout.simple_spinner_item);
@@ -185,15 +165,6 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
                 R.array.education_levels, android.R.layout.simple_spinner_item);
         educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         educationSpinner.setAdapter(educationAdapter);
-
-        // Set selected values for spinners
-        String selectedTitle = professionModel.getTitle();
-        if (selectedTitle != null) {
-            int titlePosition = titleAdapter.getPosition(selectedTitle);
-            if (titlePosition != -1) {
-                titleSpinner.setSelection(titlePosition);
-            }
-        }
 
         String selectedExperience = professionModel.getExperience();
         if (selectedExperience != null) {
@@ -218,15 +189,14 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
             @Override
             public void onClick(View v) {
                 String FullName = fullName.getText().toString();
-                String Title = titleSpinner.getSelectedItem().toString();
+                String Title = professionModel.getTitle();
                 String Charges = charges.getText().toString();
+                String email = emailEd.getText().toString();
+                String phone = titleSpinner.getText().toString();
                 String Experience = experienceSpinner.getSelectedItem().toString();
                 String Education = educationSpinner.getSelectedItem().toString();
                 String Location = location.getText().toString();
-                // Retrieve email, phone and ImageUrl from the existing professionModel
-                String email = professionModel.getEmail();
-                String phone = professionModel.getPhone();
-                String imageUrl = professionModel.getImageUrl();
+                // Retrieve ImageUrl from the existing professionModel
 
                 // Check if any of the fields are empty
                 if (TextUtils.isEmpty(FullName) || TextUtils.isEmpty(Charges) || TextUtils.isEmpty(Location) ) {
@@ -239,8 +209,12 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
                 String clientId = preferences.getString("clientId", "");
 
                 // Update the existing profession profile entry
-                DatabaseReference professionProfileRef = FirebaseDatabase.getInstance().getReference().child("SkillsProfile").child(professionModel.getProffId());
-                ProfessionModel updatedProfessionModel = new ProfessionModel(clientId, FullName, Title, Charges,imageUrl, Experience, Education, Location,email,phone);
+                DatabaseReference professionProfileRef = FirebaseDatabase.getInstance().getReference()
+                        .child("SkillsProfile")
+                        .child(professionModel.getProffId())
+                        .child(professionModel.getTitle()); // Add this line to specify the title node
+
+                ProfessionModel updatedProfessionModel = new ProfessionModel(clientId, FullName, Title, Education,Charges, "", Experience, Location,email,phone);
                 professionProfileRef.setValue(updatedProfessionModel)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -257,6 +231,7 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
                                 Toast.makeText(context, "Failed to update profession profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+
             }
         });
 

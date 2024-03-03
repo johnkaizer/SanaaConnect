@@ -119,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="Please Select your profession below"
+                android:text="Please enter your phone number below"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
@@ -129,16 +129,56 @@
                 android:id="@+id/profession"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/textView2"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                app:placeholderTextColor="@color/black"
-                tools:ignore="MissingConstraints">
+                app:placeholderTextColor="@color/black">
 
-                <Spinner
-                    android:id="@+id/profession_spinner"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profession1"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp" />
+                    android:layout_height="wrap_content"
+                    android:hint="Enter phone"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark_gray"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Please enter your email address below"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/profession"
+                app:layout_constraintStart_toStartOf="@+id/profession"
+                app:layout_constraintTop_toBottomOf="@+id/profession" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22"
+                app:placeholderTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter email"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark_gray"
+                    android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:id="@+id/textView3"
@@ -147,9 +187,9 @@
                 android:layout_marginTop="3dp"
                 android:text="Please Select your hieghest education level"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/profession"
-                app:layout_constraintStart_toStartOf="@+id/profession"
-                app:layout_constraintTop_toBottomOf="@+id/profession" />
+                app:layout_constraintEnd_toEndOf="@+id/email"
+                app:layout_constraintStart_toStartOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/email" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/education"
