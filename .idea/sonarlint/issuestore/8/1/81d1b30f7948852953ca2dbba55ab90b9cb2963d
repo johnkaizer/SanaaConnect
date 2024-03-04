@@ -1,6 +1,6 @@
 
 K
-java:S1604‚"(Make this anonymous inner class a lambda(„¬é¿øÿÿÿÿ8ĞÛÎáİ1
+java:S1604"(Make this anonymous inner class a lambda(ŸÛÛüÿÿÿÿ8µü¶«à1
 J
 java:S1604x"(Make this anonymous inner class a lambda(ØĞã÷ûÿÿÿÿ8±ÉÂ“Ü1
 J
@@ -12,8 +12,8 @@ java:S1450#"VRemove the "binding" field and declare it as a local variable in t
 t
 java:S3776,"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(¨Œşÿÿÿÿ8«ÊÂ“Ü1
 Q
-java:S1874®"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8¯İÎáİ1
+java:S1874²"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8İĞ¶«à1
 Z
-java:S1874®"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8°İÎáİ1
+java:S1874²"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8ŞĞ¶«à1
 V
-java:S1874¯"3Remove this use of "isConnected"; it is deprecated.(•İºŠùÿÿÿÿ8±İÎáİ1
+java:S1874³"3Remove this use of "isConnected"; it is deprecated.(•İºŠùÿÿÿÿ8ŞĞ¶«à1

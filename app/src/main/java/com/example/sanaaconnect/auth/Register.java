@@ -122,26 +122,30 @@ public class Register extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
 
+                                // Inside onComplete method of createUserWithEmailAndPassword task
                                 if (task.isSuccessful()) {
-                                    // Sign in success
                                     FirebaseUser currentUser = mAuth.getCurrentUser();
                                     if (currentUser != null) {
-                                        currentUser.sendEmailVerification()
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            editor.clear();
-                                                            editor.commit();
-                                                            FirebaseAuth.getInstance().signOut();
-                                                            // Verification email sent
-                                                            Toast.makeText(Register.this, "User registration successful. Verification email sent. Please verify your email address.", Toast.LENGTH_LONG).show();
-                                                        } else {
-                                                            // Failed to send verification email
-                                                            Toast.makeText(Register.this, "Failed to send verification email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
-                                                });
+                                        currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    editor.clear();
+                                                    editor.commit();
+                                                    FirebaseAuth.getInstance().signOut();
+                                                    // Verification email sent
+                                                    Toast.makeText(Register.this, "User registration successful. Verification email sent. Please verify your email address.", Toast.LENGTH_LONG).show();
+
+                                                    // Start LoginActivity
+                                                    Intent intent = new Intent(Register.this, Login.class);
+                                                    startActivity(intent);
+                                                    finish(); // Close current activity
+                                                } else {
+                                                    // Failed to send verification email
+                                                    Toast.makeText(Register.this, "Failed to send verification email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                                     }
 
                                     // Save additional user details to Firebase Realtime Database
@@ -156,12 +160,12 @@ public class Register extends AppCompatActivity {
 
                                         // Save user details to the database
                                         usersRef.child(currentUser.getUid()).setValue(newUser);
-                                        finish();
                                     }
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(Register.this, "User registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
+
                             }
                         });
             }
