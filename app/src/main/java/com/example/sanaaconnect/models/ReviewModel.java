@@ -11,16 +11,19 @@ public class ReviewModel {
     String content;
     String date;
     int reactions;
+    float rating;
 
     public ReviewModel() {
     }
-    public ReviewModel(String clientId, String ownerId, String ownerName, String content, String date, int reactions) {
+
+    public ReviewModel(String clientId, String ownerId, String ownerName, String content, String date, int reactions, float rating) {
         this.clientId = clientId;
         this.ownerId = ownerId;
         this.ownerName = ownerName;
         this.content = content;
         this.date = date;
         this.reactions = reactions;
+        this.rating = rating;
     }
 
     public String getClientId() {
@@ -70,6 +73,15 @@ public class ReviewModel {
     public void setReactions(int reactions) {
         this.reactions = reactions;
     }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
     // Method to get the current date in the desired format
     public static String getCurrentDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd h:mma", Locale.getDefault());

@@ -1,16 +1,37 @@
 
-r	java:S117r"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó¤¡Ÿıÿÿÿÿ8­ìŞ²İ1
+i
+java:S1192N"LDefine a constant instead of duplicating this literal "jobClientId" 3 times.(¡Ûç‘8ÂÈÕûá1
+m	java:S117k"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÍöÁ8ÄÈÕûá1
+s	java:S117±"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó¤¡Ÿıÿÿÿÿ8ÄÈÕûá1
 K
-java:S1604"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8­ìŞ²İ1
+java:S1604„"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8ç¦Øûá1
 K
-java:S1604”"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8®ìŞ²İ1
-E
-java:S1604v"(Make this anonymous inner class a lambda(ĞÍÉ¨8¯ìŞ²İ1
+java:S1604‹"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8ç¦Øûá1
+J
+java:S1604o"(Make this anonymous inner class a lambda(ä€³Ñşÿÿÿÿ8ÆÈÕûá1
+F
+java:S1604›"(Make this anonymous inner class a lambda(¨ıÂÊ8ÆÈÕûá1
+J
+java:S1604e"(Make this anonymous inner class a lambda(’ğ®©ıÿÿÿÿ8ÆÈÕûá1
 K
-java:S1604¤"(Make this anonymous inner class a lambda(¼ó÷Çøÿÿÿÿ8¯ìŞ²İ1
-E
-java:S1604l"(Make this anonymous inner class a lambda(éİ„ª8¯ìŞ²İ1
+java:S1604µ"(Make this anonymous inner class a lambda(‚ÿÕ¿ûÿÿÿÿ8ÆÈÕûá1
+K
+java:S1604Â"(Make this anonymous inner class a lambda(ÿØ²øÿÿÿÿ8ÇÈÕûá1
+K
+java:S1604ë"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8»‘èûá1
+K
+java:S1604ò"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8»‘èûá1
+F
+java:S1604Ó"(Make this anonymous inner class a lambda(ĞÍÉ¨8ÇÈÕûá1
+K
+java:S1604‚"(Make this anonymous inner class a lambda(¼ó÷Çøÿÿÿÿ8ÇÈÕûá1
+F
+java:S1604«"(Make this anonymous inner class a lambda(éİ„ª8»‘èûá1
 x
-java:S14502"VRemove the "binding" field and declare it as a local variable in the relevant methods.(¸—ÍÓüÿÿÿÿ8ùíŞ²İ1
+java:S1450)"VRemove the "binding" field and declare it as a local variable in the relevant methods.(¸—ÍÓüÿÿÿÿ8‘ÊÕûá1
 „
-java:S14503"bRemove the "recyclerViewReviews" field and declare it as a local variable in the relevant methods.(É¿‘ƒùÿÿÿÿ8ùíŞ²İ1
+java:S1450*"bRemove the "recyclerViewReviews" field and declare it as a local variable in the relevant methods.(É¿‘ƒùÿÿÿÿ8’ÊÕûá1
+t
+java:S3776/"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(¨Œşÿÿÿÿ8ÊÕûá1
+;
+java:S2119—"Save and re-use this "Random".(¼İÅf8ß¤Úûá1

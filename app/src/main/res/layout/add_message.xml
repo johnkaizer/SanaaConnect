@@ -29,61 +29,30 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/round"
                 android:padding="10dp"
-                android:text="Type and submit a review below"
+                android:text="Type and submit mesage below"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <EditText
-                android:id="@+id/idEdTitle"
+                android:id="@+id/idEdMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="Enter content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Enter message"
                 android:textColor="@color/black"
                 android:textColorHint="@color/dark_gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/forgotText" />
 
-            <!-- Rating TextView -->
-            <TextView
-                android:id="@+id/ratingText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="1.0"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/idEdTitle" />
-
-            <!-- Minus Button -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnMinus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/minus"
-                app:layout_constraintBottom_toBottomOf="@+id/ratingText"
-                app:layout_constraintEnd_toStartOf="@+id/ratingText"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintTop_toTopOf="@+id/ratingText" />
-
-            <!-- Plus Button -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnPlus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/add"
-                app:layout_constraintBottom_toBottomOf="@+id/ratingText"
-                app:layout_constraintStart_toEndOf="@+id/ratingText"
-                app:layout_constraintTop_toTopOf="@+id/ratingText" />
 
             <Button
-                android:id="@+id/cancelButton"
+                android:id="@+id/cancelButton1"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="40dp"
@@ -96,12 +65,12 @@
                 android:textSize="14sp"
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="@id/dialogBox"
-                app:layout_constraintEnd_toStartOf="@+id/add"
+                app:layout_constraintEnd_toStartOf="@+id/add1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnMinus" />
+                app:layout_constraintTop_toBottomOf="@+id/idEdMessage" />
 
             <Button
-                android:id="@+id/add"
+                android:id="@+id/add1"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -114,7 +83,7 @@
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="@id/dialogBox"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cancelButton" />
+                app:layout_constraintStart_toEndOf="@+id/cancelButton1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

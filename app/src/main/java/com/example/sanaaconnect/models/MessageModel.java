@@ -1,22 +1,26 @@
 package com.example.sanaaconnect.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MessageModel {
     String messageId;
     String recieverId;
     String senderId;
     String content;
-    String date;
+    String timeStamp;
     String userName;
 
     public MessageModel() {
     }
 
-    public MessageModel(String messageId, String recieverId, String senderId, String content, String date, String userName) {
+    public MessageModel(String messageId, String recieverId, String senderId, String content, String timeStamp, String userName) {
         this.messageId = messageId;
         this.recieverId = recieverId;
         this.senderId = senderId;
         this.content = content;
-        this.date = date;
+        this.timeStamp = timeStamp;
         this.userName = userName;
     }
 
@@ -52,12 +56,12 @@ public class MessageModel {
         this.content = content;
     }
 
-    public String getDate() {
-        return date;
+    public String getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public String getUserName() {
@@ -66,5 +70,11 @@ public class MessageModel {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    // Utility method to get the current timestamp in a human-readable format
+    public static String getCurrentTimeStamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return sdf.format(new Date());
     }
 }

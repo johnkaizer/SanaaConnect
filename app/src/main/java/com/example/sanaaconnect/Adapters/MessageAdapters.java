@@ -35,7 +35,7 @@ public class MessageAdapters extends RecyclerView.Adapter<MessageAdapters.ViewHo
     public void onBindViewHolder(@NonNull MessageAdapters.ViewHolder holder, int position) {
         MessageModel messageModel = list.get(position);
         holder.nameTxt.setText(messageModel.getUserName());
-        holder.timeTxt.setText(messageModel.getDate());
+        holder.timeTxt.setText(messageModel.getTimeStamp());
 
     }
 
