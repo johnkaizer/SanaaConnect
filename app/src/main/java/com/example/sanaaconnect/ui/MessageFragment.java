@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sanaaconnect.R;
+import com.example.sanaaconnect.databinding.FragmentMessageBinding;
 
 public class MessageFragment extends Fragment {
 
-
+    private FragmentMessageBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

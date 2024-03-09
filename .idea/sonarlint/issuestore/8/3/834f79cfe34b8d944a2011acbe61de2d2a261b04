@@ -1,5 +1,5 @@
 
-~
-java:S1488"\Immediately return this expression instead of assigning it to the temporary variable "root".(ö±îúÿÿÿÿ8·ß×‹Ü1
-U
-java:S1161":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ
+x
+java:S1450"VRemove the "binding" field and declare it as a local variable in the relevant methods.(¼üÁñúÿÿÿÿ8Şîÿâ1
+t
+java:S37762"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(Ü¯Ñåÿÿÿÿÿ8Íı•â1

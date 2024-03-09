@@ -7,6 +7,7 @@ import java.util.Locale;
 public class MessageModel {
     String messageId;
     String recieverId;
+    String chatId;
     String senderId;
     String content;
     String timeStamp;
@@ -15,9 +16,10 @@ public class MessageModel {
     public MessageModel() {
     }
 
-    public MessageModel(String messageId, String recieverId, String senderId, String content, String timeStamp, String userName) {
+    public MessageModel(String messageId, String recieverId, String chatId, String senderId, String content, String timeStamp, String userName) {
         this.messageId = messageId;
         this.recieverId = recieverId;
+        this.chatId = chatId;
         this.senderId = senderId;
         this.content = content;
         this.timeStamp = timeStamp;
@@ -30,6 +32,14 @@ public class MessageModel {
 
     public void setMessageId(String messageId) {
         this.messageId = messageId;
+    }
+
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
     }
 
     public String getRecieverId() {

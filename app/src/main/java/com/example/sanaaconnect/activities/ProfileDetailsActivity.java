@@ -43,6 +43,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
     private ReviewAdapter reviewAdapter;
     String fullNameUser;
     TextView ratingsTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,6 @@ public class ProfileDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 fullNameUser = dataSnapshot.getValue(String.class);
-
             }
 
             @Override
@@ -65,7 +65,6 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                 // Handle onCancelled event
             }
         });
-
 
         // Get data from intent extras
         String fullName = getIntent().getStringExtra("fullName");
@@ -117,37 +116,11 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                         String senderId = getUserUid();
                         String timeStamp = MessageModel.getCurrentTimeStamp();
 
-                        String chatId = FirebaseDatabase.getInstance().getReference("Chats").push().getKey();
+                        // Send message
+                        sendMessage(content, userName, receiverId, senderId, timeStamp);
 
-                        if (chatId == null) {
-                            Toast.makeText(getApplicationContext(), "Error creating chat session", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(chatId).child("messages");
-                        String messageId = chatRef.push().getKey(); // Generate unique key for the message
-                        MessageModel message = new MessageModel(messageId, receiverId, senderId, content, timeStamp, userName);
-                        if (messageId != null) {
-                            chatRef.child(messageId).setValue(message)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(ProfileDetailsActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show();
-                                            dialog.dismiss();
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ProfileDetailsActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        }
-
-                        // Clear the fields in your dialog
+                        // Clear the fields in your dialog and dismiss it
                         MessageEt.getText().clear();
-
-                        // Dismiss the dialog
                         dialog.dismiss();
                     }
                 });
@@ -164,7 +137,6 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
                 dialog.show();
-
             }
         });
 
@@ -204,8 +176,6 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                     }
                 });
 
-
-
                 builder.setView(dialogView);
                 AlertDialog dialog = builder.create();
                 dialogView.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
@@ -229,7 +199,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                         // Save the review to Firebase
                         DatabaseReference reviewsRef = FirebaseDatabase.getInstance().getReference("reviews");
                         String reviewId = reviewsRef.push().getKey(); // Generate unique key for the review
-                        ReviewModel review = new ReviewModel(clientId, ownerId, ownerName, content, date, reactions,rating);
+                        ReviewModel review = new ReviewModel(clientId, ownerId, ownerName, content, date, reactions, rating);
                         if (reviewId != null) {
                             reviewsRef.child(reviewId).setValue(review)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -269,8 +239,63 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
 
+    private void sendMessage(String content, String userName, String receiverId, String senderId, String timeStamp) {
+        // Reference to your chats
+        DatabaseReference chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
 
+        // Query for existing conversation between senderId and receiverId
+        chatsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String chatId = null;
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot messageSnapshot : snapshot.child("messages").getChildren()) {
+                        MessageModel message = messageSnapshot.getValue(MessageModel.class);
+                        if (message != null && ((message.getSenderId().equals(senderId) && message.getRecieverId().equals(receiverId)) ||
+                                (message.getRecieverId().equals(senderId) && message.getSenderId().equals(receiverId)))) {
+                            chatId = snapshot.getKey();
+                            break;
+                        }
+                    }
+
+                    if (chatId != null) break;
+                }
+
+                if (chatId == null) {
+                    // No existing conversation found, create a new one
+                    chatId = chatsRef.push().getKey();
+                }
+
+                // Now we have chatId, proceed to send message
+                if (chatId != null) {
+                    DatabaseReference chatRef = chatsRef.child(chatId).child("messages");
+                    String messageId = chatRef.push().getKey();
+
+                    MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, userName);
+                    chatRef.child(messageId).setValue(message)
+                            .addOnSuccessListener(aVoid -> {
+                                // Handle success
+                                Toast.makeText(ProfileDetailsActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(e -> {
+                                // Handle failure
+                                Toast.makeText(ProfileDetailsActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                } else {
+                    // Handle error, failed to create chatId
+                    Toast.makeText(ProfileDetailsActivity.this, "Error creating chat session", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
+                Toast.makeText(ProfileDetailsActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Method to generate a unique username
@@ -318,5 +343,4 @@ public class ProfileDetailsActivity extends AppCompatActivity {
             }
         });
     }
-
 }
