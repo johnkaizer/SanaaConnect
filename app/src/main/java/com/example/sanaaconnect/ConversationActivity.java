@@ -33,6 +33,7 @@ public class ConversationActivity extends AppCompatActivity {
     private String senderId, receiverId, chatId;
     private EditText editTextEt;
     private Button sendBtn;
+    private DatabaseReference chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,67 +97,61 @@ public class ConversationActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String content) {
-        DatabaseReference chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
+        DatabaseReference messagesRef = FirebaseDatabase.getInstance().getReference("Chats");
 
-        if (chatId != null) {
-            // If chatId is already available, send the message to the existing chat
-            DatabaseReference chatRef = chatsRef.child(chatId).child("messages");
-            String messageId = chatRef.push().getKey();
-
-            String timeStamp = MessageModel.getCurrentTimeStamp();
-            String userName = "Unknown"; // You can update this with the actual username
-
-            MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, userName);
-            if (messageId != null) {
-                chatRef.child(messageId).setValue(message)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(ConversationActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show();
-                                editTextEt.getText().clear();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ConversationActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        } else {
-            // Query for existing conversation between senderId and receiverId
-            Query query = chatsRef.orderByChild("senderId_receiverId").equalTo(senderId + "_" + receiverId);
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        // Retrieve the chatId and send the message to the existing chat
-                        for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) {
-                            chatId = chatSnapshot.getKey();
-                            sendMessage(content);
-                            return;
-                        }
-                    } else {
-                        // Create a new chat and send the message
-                        String newChatId = chatsRef.push().getKey();
-                        if (newChatId != null) {
-                            chatId = newChatId;
-                            sendMessage(content);
-                        } else {
-                            Toast.makeText(ConversationActivity.this, "Error creating new chat", Toast.LENGTH_SHORT).show();
-                        }
+        // Check if there is an existing chat for the sender and receiver
+        String membersKey = senderId.compareTo(receiverId) > 0 ? senderId + "_" + receiverId : receiverId + "_" + senderId;
+        Query query = messagesRef.orderByChild("members").equalTo(membersKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) {
+                    // Iterate over each chat and check if it matches the membersKey
+                    String chatId = chatSnapshot.getKey();
+                    if (chatSnapshot.child("messages").child(chatId).child("chatId").getValue(String.class).equals(chatId)) {
+                        // Existing chat found, use this chatId to send the message
+                        sendMessageToExistingChat(chatId, content);
+                        return;
                     }
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(ConversationActivity.this, "Failed to send message: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                // If no existing chat found, create a new chat and send the message
+                String chatId = messagesRef.push().getKey();
+                if (chatId != null) {
+                    // Set up initial chat details
+                    messagesRef.child(chatId).child("members").setValue(membersKey);
+                    sendMessageToExistingChat(chatId, content);
+                } else {
+                    // Handle error creating new chat
+                    Toast.makeText(ConversationActivity.this, "Failed to create new chat", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle onCancelled event
+                Toast.makeText(ConversationActivity.this, "Failed to check for existing chat: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void sendMessageToExistingChat(String chatId, String content) {
+        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(chatId).child("messages");
+        String messageId = chatRef.push().getKey();
+        String timeStamp = String.valueOf(System.currentTimeMillis());
+        MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, "Unknown");
+
+        if (messageId != null) {
+            chatRef.child(messageId).setValue(message).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(ConversationActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show();
+                    editTextEt.getText().clear(); // Clear the message field
+                } else {
+                    Toast.makeText(ConversationActivity.this, "Failed to send message", Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
-
-
 
 }
 

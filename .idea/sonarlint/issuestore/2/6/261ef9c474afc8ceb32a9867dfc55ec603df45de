@@ -1,7 +1,26 @@
 
+m	java:S117I"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÍöÁ8¤ŠãŸâ1
 J
-java:S16047"(Make this anonymous inner class a lambda(ƒÖı–üÿÿÿÿ8‡õÖÜİ1
-Y
-java:S1854$"<Remove this useless assignment to local variable "clientId".(¡Ûç‘8¬ÇÜİ1
+java:S1604M"(Make this anonymous inner class a lambda(ä€³Ñşÿÿÿÿ8‡õÖÜİ1
+E
+java:S1604_"(Make this anonymous inner class a lambda(¨ıÂÊ8¥ŠãŸâ1
 J
-java:S1481$"-Remove this unused "clientId" local variable.(¡Ûç‘8–¬ÇÜİ1
+java:S1604C"(Make this anonymous inner class a lambda(’ğ®©ıÿÿÿÿ8¥ŠãŸâ1
+J
+java:S1604r"(Make this anonymous inner class a lambda(ƒÖı–üÿÿÿÿ8¦ŠãŸâ1
+x
+java:S1450%"VRemove the "binding" field and declare it as a local variable in the relevant methods.(ùêøÓûÿÿÿÿ8ŞéåŸâ1
+t
+java:S3776)"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(¨Œşÿÿÿÿ8á‹ãŸâ1
+Z
+java:S18545">Remove this useless assignment to local variable "recieverId".(øãõ?8¡€ŞŸâ1
+K
+java:S14815"/Remove this unused "recieverId" local variable.(øãõ?8¦€ŞŸâ1
+u
+java:S3776°"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(³ğ‚·şÿÿÿÿ8ìíŸâ1
+J
+java:S1602Ó",Remove useless curly braces around statement(§ÀÇ8şíŸâ1
+O
+java:S1602×",Remove useless curly braces around statement(ÕÊ¾øÿÿÿÿ8‚íŸâ1
+;
+java:S2119ë"Save and re-use this "Random".(¼İÅf8õŠêŸâ1

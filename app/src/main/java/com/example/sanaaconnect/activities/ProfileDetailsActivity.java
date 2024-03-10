@@ -242,61 +242,52 @@ public class ProfileDetailsActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String content, String userName, String receiverId, String senderId, String timeStamp) {
-        // Reference to your chats
         DatabaseReference chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
 
-        // Query for existing conversation between senderId and receiverId
-        chatsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        // Assume you have a 'members' node under each chat that contains both senderId and receiverId
+        String membersKey = senderId.compareTo(receiverId) > 0 ? senderId + "_" + receiverId : receiverId + "_" + senderId;
+
+        // Check for existing conversation by members
+        Query query = chatsRef.orderByChild("members").equalTo(membersKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String chatId = null;
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    for (DataSnapshot messageSnapshot : snapshot.child("messages").getChildren()) {
-                        MessageModel message = messageSnapshot.getValue(MessageModel.class);
-                        if (message != null && ((message.getSenderId().equals(senderId) && message.getRecieverId().equals(receiverId)) ||
-                                (message.getRecieverId().equals(senderId) && message.getSenderId().equals(receiverId)))) {
-                            chatId = snapshot.getKey();
-                            break;
-                        }
+                if (dataSnapshot.exists()) {
+                    // Existing conversation found, grab its chatId
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        chatId = snapshot.getKey();
+                        break; // Assuming unique chat sessions per user pair
                     }
-
-                    if (chatId != null) break;
-                }
-
-                if (chatId == null) {
-                    // No existing conversation found, create a new one
+                } else {
+                    // No existing conversation, create a new one
                     chatId = chatsRef.push().getKey();
+                    if (chatId != null) {
+                        // Optionally set up members or other initial chat data
+                        chatsRef.child(chatId).child("members").setValue(membersKey);
+                    }
                 }
 
-                // Now we have chatId, proceed to send message
                 if (chatId != null) {
+                    // Send the message now that we have a chatId
                     DatabaseReference chatRef = chatsRef.child(chatId).child("messages");
                     String messageId = chatRef.push().getKey();
-
                     MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, userName);
+
                     chatRef.child(messageId).setValue(message)
-                            .addOnSuccessListener(aVoid -> {
-                                // Handle success
-                                Toast.makeText(ProfileDetailsActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                // Handle failure
-                                Toast.makeText(ProfileDetailsActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-                } else {
-                    // Handle error, failed to create chatId
-                    Toast.makeText(ProfileDetailsActivity.this, "Error creating chat session", Toast.LENGTH_SHORT).show();
+                            .addOnSuccessListener(aVoid -> Toast.makeText(ProfileDetailsActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e -> Toast.makeText(ProfileDetailsActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle possible errors
                 Toast.makeText(ProfileDetailsActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     // Method to generate a unique username
     private String generateUniqueUsername() {

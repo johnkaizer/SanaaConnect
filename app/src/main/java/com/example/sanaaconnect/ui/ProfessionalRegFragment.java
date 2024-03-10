@@ -11,9 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -38,6 +41,7 @@ public class ProfessionalRegFragment extends Fragment {
     private DatabaseReference databaseReference;
     private RecyclerView profRecyclerView;
     private String clientId;
+    private EditText searchET;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,8 +49,10 @@ public class ProfessionalRegFragment extends Fragment {
         binding = FragmentProfessionalRegBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         profRecyclerView = root.findViewById(R.id.skillsRv);
+        searchET = root.findViewById(R.id.editText);
 
         fetchProfessional();
+        setupSearch();
         binding.addSkills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +66,48 @@ public class ProfessionalRegFragment extends Fragment {
         loadingProgressBar = root.findViewById(R.id.loadingProgressBar);
         return root;
     }
+
+    private void setupSearch() {
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Nothing to do here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Filter list as the user types
+                filterSkills(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Nothing to do here
+            }
+        });
+    }
+
+    private void filterSkills(String query) {
+        // New list to hold the filtered skills profile
+        ArrayList<ProfessionModel> filteredList = new ArrayList<>();
+
+        // Loop through the original list to find matches
+        for (ProfessionModel professionModel : professionList) {
+            if (professionModel.getTitle().toLowerCase().contains(query.toLowerCase()) || professionModel.getFullName().toLowerCase().contains(query.toLowerCase())) {
+                // If the skills profile title or fullname contains the search query, add it to the filtered list
+                filteredList.add(professionModel);
+            }
+        }
+
+        // Update the RecyclerView with the filtered list
+        updateRecyclerView(filteredList);
+    }
+
+    private void updateRecyclerView(ArrayList<ProfessionModel> list) {
+        ProfessionManagementAdapter professionManagementAdapter1 = new ProfessionManagementAdapter(list, getContext());
+        profRecyclerView.setAdapter(professionManagementAdapter1);
+    }
+
     private void showLoadingIndicator() {
         if (loadingProgressBar != null) {
             loadingProgressBar.setVisibility(View.VISIBLE);

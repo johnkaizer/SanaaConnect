@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,7 @@ public class JobsFragment extends Fragment {
     private DatabaseReference databaseReference;
     private RecyclerView jobRecyclerView;
     private String clientId;
+    private EditText searchET;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,12 +63,14 @@ public class JobsFragment extends Fragment {
         jobRecyclerView = root.findViewById(R.id.jobsRv);
         jobRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         jobList = new ArrayList<>();
+        searchET = root.findViewById(R.id.editText);
 
         // Initialize Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Jobs"); // Replace with your actual Firebase node
 
         fetchJobs();
+        setupSearch();
         binding.addJobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,6 +170,48 @@ public class JobsFragment extends Fragment {
 
         return root;
     }
+
+    private void setupSearch() {
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Nothing to do here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Filter job list as the user types
+                filterJobs(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Nothing to do here
+            }
+        });
+    }
+
+    private void filterJobs(String query) {
+        // New list to hold the filtered jobs
+        ArrayList<JobModel> filteredList = new ArrayList<>();
+
+        // Loop through the original list to find matches
+        for (JobModel job : jobList) {
+            if (job.getJobTitle().toLowerCase().contains(query.toLowerCase()) || job.getDescription().toLowerCase().contains(query.toLowerCase())) {
+                // If the job title or description contains the search query, add it to the filtered list
+                filteredList.add(job);
+            }
+        }
+
+        // Update the RecyclerView with the filtered list
+        updateRecyclerView(filteredList);
+    }
+
+    private void updateRecyclerView(ArrayList<JobModel> list) {
+        JobManagementAdapter jobAdapter = new JobManagementAdapter(list, getContext());
+        jobRecyclerView.setAdapter(jobAdapter);
+    }
+
 
     private void fetchJobs() {
         // Retrieve staff id from SharedPreferences
