@@ -9,5 +9,7 @@ z
 java:S1450."]Remove the "swipeContainer" field and declare it as a local variable in the relevant methods.(Í˜©³8Çã¿Üß1
 c
 java:S1874_"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8ïã¿Üß1
+u
+java:S3776¹"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(èëÔíÿÿÿÿÿ8Óêğîâ1
 d
-java:S1874Â"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8â‡èòß1
+java:S1874Á"ARemove this use of "overridePendingTransition"; it is deprecated.(üÈ”ûÿÿÿÿÿ8Ôêğîâ1

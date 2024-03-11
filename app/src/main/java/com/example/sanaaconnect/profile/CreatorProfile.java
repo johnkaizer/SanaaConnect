@@ -185,39 +185,57 @@ public class CreatorProfile extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(CreatorProfile.this);
-
-        } else if (id == R.id.menu_refresh){
-            //refresh activity
+        } else if (id == R.id.menu_refresh) {
+            // Refresh activity
             startActivity(getIntent());
-            overridePendingTransition(0,0);
-            
+            overridePendingTransition(0, 0);
         } else if (id == R.id.menu_update_profile) {
             Intent intent = new Intent(CreatorProfile.this, UpdateProfile.class);
             startActivity(intent);
-
-        } else if (id == R.id.menu_portfolio) {
-            Intent intent = new Intent(CreatorProfile.this, PortfolioActivity.class);
-            startActivity(intent);
-
-        }else if (id == R.id.menu_update_email) {
+        } else if (id == R.id.menu_update_email) {
             Intent intent = new Intent(CreatorProfile.this, UpdateEmail.class);
             startActivity(intent);
-
         } else if (id == R.id.menu_change_password) {
             Intent intent = new Intent(CreatorProfile.this, ChangePassword.class);
             startActivity(intent);
-
         } else if (id == R.id.menu_delete_profile) {
             Intent intent = new Intent(CreatorProfile.this, DeleteProfile.class);
             startActivity(intent);
+        } else if (id == R.id.menu_portfolio) {
+            // Check user role before launching the PortfolioActivity
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        Users user = snapshot.getValue(Users.class);
+                        if (user != null) {
+                            String role = user.getRole();
+                            // Check if the user is an admin or a client
+                            if (!role.equals("Admin") && !role.equals("Client")) {
+                                // If not admin or client, launch the PortfolioActivity
+                                Intent intent = new Intent(CreatorProfile.this, PortfolioActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // Display a message indicating that the user does not have permission to access portfolio
+                                Toast.makeText(CreatorProfile.this, "Not available for your role.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(CreatorProfile.this, "Error retrieving user role.", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
-
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
     private ReviewAdapter reviewAdapter;
     String fullNameUser;
     TextView ratingsTextView;
+    ImageView imageViewUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         binding = ActivityProfileDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         recyclerViewReviews = findViewById(R.id.reviewsRV);
+        imageViewUrl = findViewById(R.id.imageViewProfile);
         recyclerViewReviews.setLayoutManager(new LinearLayoutManager(this));
         reviewAdapter = new ReviewAdapter(this, new ArrayList<>());
         recyclerViewReviews.setAdapter(reviewAdapter);
@@ -75,6 +80,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         String location = getIntent().getStringExtra("location");
         String experience = getIntent().getStringExtra("experience");
         String clientId = getIntent().getStringExtra("jobClientId");
+        String imageUrl = getIntent().getStringExtra("imageUrl");
 
         // Use the data as needed
         TextView nameTextView = findViewById(R.id.textViewFullName);
@@ -93,9 +99,24 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         educationTextView.setText(education);
         locationTextView.setText(location);
         experienceTextView.setText(experience);
+        Picasso.get().load(imageUrl).into(imageViewUrl);
 
         // Fetch and display reviews for the specific user
         fetchAndDisplayReviews(clientId);
+        binding.textViewPortfolio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an Intent to launch PortfolioActivity
+                Intent intent = new Intent(ProfileDetailsActivity.this, PortfolioViewActivity.class);
+
+                // Add the clientId as an extra to the intent
+                intent.putExtra("jobClientId", clientId);
+
+                // Start PortfolioActivity
+                startActivity(intent);
+            }
+        });
+
 
         binding.chart.setOnClickListener(new View.OnClickListener() {
             @Override

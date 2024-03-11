@@ -1,11 +1,14 @@
 package com.example.sanaaconnect.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,6 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sanaaconnect.activities.JobDetailsActivity;
 import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.models.JobModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -109,8 +119,103 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
                 context.startActivity(intent);
             }
         });
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                // Check if the current user is an admin (You need to implement this logic)
+                // Call isAdmin() method and handle the result
+                isAdmin(new AdminCheckListener() {
+                    @Override
+                    public void onAdminChecked(boolean isAdmin) {
+                        if (isAdmin) {
+                            // User is an admin, perform admin-specific actions
+                            showDeleteConfirmationDialog(jobModel);
+                        } else {
+                            // User is not an admin
+                            Toast.makeText(context, "Only admins can delete jobs", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                return false; // Not consumed, proceed with regular click handling
+            }
+        });
 
     }
+
+    private void isAdmin(AdminCheckListener listener) {
+        // Get the current user's UID from Firebase Authentication
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+
+            // Reference to the "Users" table in the Firebase Realtime Database
+            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
+
+            // Query to get the role of the current user using their UID
+            usersRef.child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    boolean isAdmin = false;
+                    // Check if the user exists in the database
+                    if (dataSnapshot.exists()) {
+                        // Get the role of the user
+                        String role = dataSnapshot.child("role").getValue(String.class);
+
+                        // Check if the role is admin
+                        if (role != null && role.equals("Admin")) {
+                            // User is an admin
+                            isAdmin = true;
+                        }
+                    }
+                    // Notify the listener with the result
+                    listener.onAdminChecked(isAdmin);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle database error
+                }
+            });
+        }
+    }
+
+    // Define an interface for the listener
+    interface AdminCheckListener {
+        void onAdminChecked(boolean isAdmin);
+    }
+
+    private void showDeleteConfirmationDialog(JobModel jobModel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Confirm Deletion");
+        builder.setMessage("Are you sure you want to delete this job?");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteJob(jobModel.getJobTitle());
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    private void deleteJob(String jobTitle) {
+        DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference("Jobs");
+        jobRef.orderByChild("jobTitle").equalTo(jobTitle).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    snapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+    }
+
     @Override
     public int getItemCount() {
         return jobList.size();

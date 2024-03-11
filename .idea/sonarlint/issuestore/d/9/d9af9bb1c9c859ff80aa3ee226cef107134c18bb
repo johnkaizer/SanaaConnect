@@ -1,33 +1,31 @@
 
 J
-java:S1604X"(Make this anonymous inner class a lambda(¹ý¬Ëþÿÿÿÿ8ÌÎËºÜ1
+java:S1604_"(Make this anonymous inner class a lambda(¹ý¬Ëþÿÿÿÿ8®Ê™çâ1
 E
-java:S1604b"(Make this anonymous inner class a lambda(‰äÕ8ÌÎËºÜ1
-K
-java:S1604ž"(Make this anonymous inner class a lambda(„¬é¿øÿÿÿÿ8¤ð«à1
-F
-java:S1604Ñ"(Make this anonymous inner class a lambda(ï¤ÛŸ8Ù™Š½Ü1
-K
-java:S1604Î"(Make this anonymous inner class a lambda(‹äÐçýÿÿÿÿ8Ù™Š½Ü1
-K
-java:S1604Ù"(Make this anonymous inner class a lambda(œÁÈÌþÿÿÿÿ8Ú™Š½Ü1
+java:S1604f"(Make this anonymous inner class a lambda(‰äÕ8¯Ê™çâ1
 X
-java:S18744"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ8Ø‘ÆºÜ1
-[
-java:S1874^">Remove this use of "startActivityForResult"; it is deprecated.(ÏÍÖ„8˜ÐËºÜ1
+java:S18746"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ8Ø‘ÆºÜ1
+`
+java:S1874r">Remove this use of "startActivityForResult"; it is deprecated.(ç×µ«øÿÿÿÿ8åÎ™çâ1
+f
+java:S1874v"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8åÎ™çâ1
+N
+java:S1874"1Remove this use of "getBitmap"; it is deprecated.(ã©õá8èÎ™çâ1
 Y
-java:S1874‚"6Remove this use of "ProgressDialog"; it is deprecated.(¿Ú•ðúÿÿÿÿ8¶¡ð«à1
+java:S1874 "6Remove this use of "ProgressDialog"; it is deprecated.(¿Ú•ðúÿÿÿÿ8ðÎ™çâ1
 P
-java:S1874ƒ"2Remove this use of "setMessage"; it is deprecated.(¬±·ó8·¡ð«à1
-Q
-java:S1874º"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8¶›Š½Ü1
-Z
-java:S1874º"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8·›Š½Ü1
-V
-java:S1874»"3Remove this use of "isConnected"; it is deprecated.(•ÝºŠùÿÿÿÿ8·›Š½Ü1
+java:S1874¡"2Remove this use of "setMessage"; it is deprecated.(¬±·ó8ñÎ™çâ1
 O
-java:S1874Á"1Remove this use of "getBitmap"; it is deprecated.(ã©õá8¹›Š½Ü1
+java:S1874¼"1Remove this use of "getBitmap"; it is deprecated.(ã©õá8õÎ™çâ1
+I
+java:S1602É",Remove useless curly braces around statement(„Ðè@8ûÎ™çâ1
+Q
+java:S1874ì"3Remove this use of "NetworkInfo"; it is deprecated.(ÿ»¶Ã8”Ï™çâ1
+Z
+java:S1874ì"<Remove this use of "getActiveNetworkInfo"; it is deprecated.(ÿ»¶Ã8•Ï™çâ1
+V
+java:S1874í"3Remove this use of "isConnected"; it is deprecated.(•ÝºŠùÿÿÿÿ8–Ï™çâ1
 m
-java:S1874î"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(œƒƒ©ùÿÿÿÿ8Ã›Š½Ü1
+java:S1874ñ"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(œƒƒ©ùÿÿÿÿ8™Ï™çâ1
 X
-java:S1874ï"5Remove this use of "onBackPressed"; it is deprecated.(‘Ñàÿÿÿÿÿ8Ã›Š½Ü1
+java:S1874ò"5Remove this use of "onBackPressed"; it is deprecated.(‘Ñàÿÿÿÿÿ8™Ï™çâ1

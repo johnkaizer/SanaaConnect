@@ -2424,3 +2424,9 @@ Q.idea/sonarlint/securityhotspotstore/c/c/ccbe6b07a7f70b876fb4268069a145dbfd1365
 Q.idea/sonarlint/securityhotspotstore/f/f/ff122142f0d7c8a56ffa6d2bfd51676e0c036aa3,0\b\0b91f7086143fbc818f29a45a0f21063bb8aedbb
 t
 Dapp/src/main/java/com/example/sanaaconnect/ConversationActivity.java,f\4\f490f83778049c82f813949ffc5264d8ac470bb2
+u
+Eapp/src/main/java/com/example/sanaaconnect/PortfolioViewActivity.java,3\d\3dbcdb18e18e5607cda5d7dbed877c748857a76c
+
+Oapp/src/main/java/com/example/sanaaconnect/activities/ConversationActivity.java,c\1\c1f7bbec2f1d3dc0482ba8279884aa34b33596f4
+€
+Papp/src/main/java/com/example/sanaaconnect/activities/PortfolioViewActivity.java,a\6\a6c38c054b3b34b591e5a801ad9a58c4573daeee

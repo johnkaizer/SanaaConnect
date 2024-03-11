@@ -11,10 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sanaaconnect.ConversationActivity;
+import com.example.sanaaconnect.activities.ConversationActivity;
 import com.example.sanaaconnect.R;
-import com.example.sanaaconnect.activities.ProfileDetailsActivity;
-import com.example.sanaaconnect.models.JobModel;
 import com.example.sanaaconnect.models.MessageModel;
 
 import java.util.List;

@@ -22,7 +22,10 @@
         android:theme="@style/Theme.SanaaConnect"
         tools:targetApi="31">
         <activity
-            android:name=".ConversationActivity"
+            android:name=".activities.PortfolioViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ConversationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.PortfolioActivity"

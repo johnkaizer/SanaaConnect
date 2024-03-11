@@ -286,7 +286,7 @@ public class HomeFragment extends Fragment  {
     private void getUserRole() {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userIdentity);
 
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {

@@ -1,4 +1,4 @@
-package com.example.sanaaconnect;
+package com.example.sanaaconnect.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sanaaconnect.Adapters.TextAdapters;
+import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.models.MessageModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

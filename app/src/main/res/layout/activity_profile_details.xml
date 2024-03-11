@@ -139,6 +139,19 @@
         app:layout_constraintStart_toStartOf="@+id/textViewTitle"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
+        <TextView
+            android:id="@+id/textViewPortfolio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableStart="@drawable/port"
+            android:drawablePadding="5dp"
+            android:text="View Portfolio"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/education" />
+
     <TextView
         android:id="@+id/education"
         android:layout_width="wrap_content"

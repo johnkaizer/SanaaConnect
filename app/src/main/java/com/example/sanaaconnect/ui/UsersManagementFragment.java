@@ -66,7 +66,7 @@ public class UsersManagementFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
         usersRec.setHasFixedSize(true);
         usersList = new ArrayList<>();
-        usersAdapter = new UsersAdapter(usersList);
+        usersAdapter = new UsersAdapter(usersList,getContext());
         usersRec.setAdapter(usersAdapter);
         usersRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         usersRec.setNestedScrollingEnabled(false);

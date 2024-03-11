@@ -42,7 +42,7 @@ public class PortfolioActivity extends AppCompatActivity {
     AppCompatButton pickImage;
     AppCompatButton submitImage;
     RecyclerView recyclerViewImage;
-    private ArrayList<Portfolio> portfolios;
+     ArrayList<Portfolio> portfolios;
     String userIdentity;
     Uri imageUri;
 

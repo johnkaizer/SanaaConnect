@@ -111,11 +111,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:text="Role:"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView30"
             app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -129,6 +127,19 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView31"
             app:layout_constraintStart_toEndOf="@+id/textView31"
             app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/business" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

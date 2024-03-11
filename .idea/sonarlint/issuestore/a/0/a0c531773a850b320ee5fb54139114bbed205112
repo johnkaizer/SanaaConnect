@@ -1,8 +1,14 @@
 
 ˆ
-java:S1319#"lThe type of "filteredList" should be an interface such as "List" rather than the implementation "ArrayList".(‚Ï°b8“±ƒßÜ1
+java:S1319-"lThe type of "filteredList" should be an interface such as "List" rather than the implementation "ArrayList".(‚Ï°b8Û´òñâ1
 E
-java:S1604a"(Make this anonymous inner class a lambda(‹÷Ë×8”±ƒßÜ1
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ8Úú…®Ü1
+java:S1604k"(Make this anonymous inner class a lambda(‹÷Ë×8Ü´òñâ1
+J
+java:S1604"(Make this anonymous inner class a lambda(Å“Üúÿÿÿÿ8Ü´òñâ1
+E
+java:S1604z"(Make this anonymous inner class a lambda(¯´½Ç8Ü´òñâ1
+K
+java:S1604À"(Make this anonymous inner class a lambda(‹çÙüÿÿÿÿ8İ´òñâ1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥³•ıÿÿÿÿ8ß´òñâ1
 e
-java:S2583D"CChange this condition so that it does not always evaluate to "true"(½õ¸†ÿÿÿÿÿ8¨²ƒßÜ1
+java:S2583N"CChange this condition so that it does not always evaluate to "true"(½õ¸†ÿÿÿÿÿ8Áµòñâ1

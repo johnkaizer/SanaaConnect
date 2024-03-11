@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -42,6 +43,7 @@ public class AddSkillProfileActivity extends AppCompatActivity {
     EditText fullNameEt;
     EditText chargesEt;
     EditText locationEt;
+    EditText phoneEt;
     Spinner proffSpinner;
     Spinner eduSpinner;
     Spinner experiemceSpinner;
@@ -53,6 +55,7 @@ public class AddSkillProfileActivity extends AppCompatActivity {
     Uri imageUri;
     boolean isImageAdded = false;
     private String clientId;
+    DatabaseReference skillsProfileRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         fullNameEt = findViewById(R.id.fullName);
         chargesEt = findViewById(R.id.charges);
         locationEt = findViewById(R.id.location);
+        phoneEt = findViewById(R.id.phone_txt);
         eduSpinner = findViewById(R.id.education_spinner);
         experiemceSpinner = findViewById(R.id.experience_spinner);
         proffSpinner = findViewById(R.id.profession_spinner);
@@ -85,13 +89,13 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         proffSpinner.setAdapter(adapter3);
 
+        // Initialize Firebase
+        skillsProfileRef = FirebaseDatabase.getInstance().getReference("SkillsProfile").child(clientId);
+
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, REQUEST_CODE_IMAGE);
+                openImagePicker();
             }
         });
 
@@ -103,6 +107,32 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void openImagePicker() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), REQUEST_CODE_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Get the image URI
+            imageUri = data.getData();
+
+            // Set the image to ImageView
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                imageV.setImageBitmap(bitmap);
+                isImageAdded = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void insertData() {
         // Check for internet connection
         if (!isInternetConnected()) {
@@ -111,6 +141,7 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         }
 
         String fullName = fullNameEt.getText().toString();
+        String phone = phoneEt.getText().toString();
         String title = proffSpinner.getSelectedItem().toString().toLowerCase();
         String education = eduSpinner.getSelectedItem().toString();
         String charges = chargesEt.getText().toString();
@@ -118,10 +149,9 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         String location = locationEt.getText().toString();
         // Get email and phone of the logged-in user
         String email = Constants.getUserEmail();
-        String phone = Constants.getUserPhone();
 
         // Check if any of the fields are empty
-        if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(title) || TextUtils.isEmpty(education) || TextUtils.isEmpty(charges) ) {
+        if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(title) || TextUtils.isEmpty(education) || TextUtils.isEmpty(charges)) {
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -131,8 +161,6 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         progressDialog.setMessage("Saving skill profile...");
         progressDialog.setCancelable(false);
         progressDialog.show();
-
-        DatabaseReference skillsProfileRef = FirebaseDatabase.getInstance().getReference("SkillsProfile").child(clientId);
 
         // Create a ProfessionModel object
         ProfessionModel professionModel = new ProfessionModel();
@@ -147,39 +175,61 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         professionModel.setPhone(phone);
 
         // Upload image to Firebase Storage
-        uploadImageToStorage(title, new ImageUploadCallback() {
-            @Override
-            public void onImageUploadSuccess(String imageUrl) {
-                // Save the image URL to the professionModel
-                professionModel.setImageUrl(imageUrl);
-
-                // Save the ProfessionModel object to Firebase
-                skillsProfileRef.child(title).setValue(professionModel)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                progressDialog.dismiss();
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(AddSkillProfileActivity.this, "Skill profile added successfully", Toast.LENGTH_SHORT).show();
-                                    // Clear fields or handle UI as needed
-                                    fullNameEt.setText("");
-                                    chargesEt.setText("");
-                                    locationEt.setText("");
-                                } else {
-                                    Toast.makeText(AddSkillProfileActivity.this, "Failed to add skill profile", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-
-            @Override
-            public void onImageUploadFailure() {
-                progressDialog.dismiss();
-                Toast.makeText(AddSkillProfileActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (isImageAdded) {
+            uploadImageToStorage(professionModel, title);
+        } else {
+            // If no image is added, directly save the data to Firebase
+            saveProfessionModelToFirebase(professionModel, title);
+        }
     }
 
+    private void uploadImageToStorage(ProfessionModel professionModel, String title) {
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            // You can adjust the compression quality based on your requirements
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+            byte[] data = baos.toByteArray();
+
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference()
+                    .child("skills_images")
+                    .child(clientId)
+                    .child(title);
+
+            UploadTask uploadTask = storageRef.putBytes(data);
+            uploadTask.addOnSuccessListener(taskSnapshot -> {
+                storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                    String imageUrl = uri.toString();
+                    professionModel.setImageUrl(imageUrl);
+                    saveProfessionModelToFirebase(professionModel, title);
+                });
+            }).addOnFailureListener(e -> {
+                progressDialog.dismiss();
+                Toast.makeText(AddSkillProfileActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            progressDialog.dismiss();
+            Toast.makeText(AddSkillProfileActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void saveProfessionModelToFirebase(ProfessionModel professionModel, String title) {
+        skillsProfileRef.child(title).setValue(professionModel)
+                .addOnCompleteListener(task -> {
+                    progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+                        Toast.makeText(AddSkillProfileActivity.this, "Skill profile added successfully", Toast.LENGTH_SHORT).show();
+                        // Clear fields or handle UI as needed
+                        fullNameEt.setText("");
+                        chargesEt.setText("");
+                        locationEt.setText("");
+                    } else {
+                        Toast.makeText(AddSkillProfileActivity.this, "Failed to add skill profile", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     private boolean isInternetConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -187,53 +237,6 @@ public class AddSkillProfileActivity extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private void uploadImageToStorage(String productId, ImageUploadCallback callback) {
-        if (isImageAdded) {
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-                // You can adjust the compression quality based on your requirements
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                byte[] data = baos.toByteArray();
-
-                StorageReference storageRef = FirebaseStorage.getInstance().getReference()
-                        .child("skills_images")
-                        .child(clientId)
-                        .child(productId);
-
-                UploadTask uploadTask = storageRef.putBytes(data);
-                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                String imageUrl = uri.toString();
-                                callback.onImageUploadSuccess(imageUrl);
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        callback.onImageUploadFailure();
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-                callback.onImageUploadFailure();
-            }
-        } else {
-            // No image added
-            callback.onImageUploadSuccess(null);
-        }
-    }
-
-    interface ImageUploadCallback {
-        void onImageUploadSuccess(String imageUrl);
-        void onImageUploadFailure();
-    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
