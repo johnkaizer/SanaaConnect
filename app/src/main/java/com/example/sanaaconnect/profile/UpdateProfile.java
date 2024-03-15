@@ -36,15 +36,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UpdateProfile extends AppCompatActivity {
 
     private EditText editTextUpdateName, editTextUpdateDoB, editTextUpdateMobile;
-    private RadioGroup radioGroupUpdateGender;
-    private RadioButton radioButtonUpdateGenderSelected;
-    private String textFullName, textDoB, textGender, textMobile;
+    private String textFullName, textMobile;
     private FirebaseAuth authProfile;
     private ProgressBar progressBar;
 
@@ -61,7 +61,6 @@ public class UpdateProfile extends AppCompatActivity {
         editTextUpdateDoB = findViewById(R.id.editText_update_profile_dob);
         editTextUpdateMobile = findViewById(R.id.editText_update_profile_mobile);
 
-        radioGroupUpdateGender = findViewById(R.id.radio_group_update_profile_gender);
 
         authProfile = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
@@ -92,32 +91,6 @@ public class UpdateProfile extends AppCompatActivity {
         });
 
 
-
-        //Setting up DatePicker on editText
-        editTextUpdateDoB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //extracting saved dd, m, yyyy into different variables
-                String textSADoB [] = textDoB.split("/");
-
-                int day = Integer.parseInt(textSADoB[0]);
-                int month = Integer.parseInt(textSADoB[1]) - 1;
-                int year = Integer.parseInt(textSADoB[2]);
-
-                DatePickerDialog picker;
-
-                //Date Picker Dialog
-                picker = new DatePickerDialog(UpdateProfile.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editTextUpdateDoB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                    }
-                }, year, month, day);
-                picker.show();
-
-            }
-        });
-
         //Update Profile
         Button buttonUpdateProfile = findViewById(R.id.button_update_profile);
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
@@ -134,99 +107,45 @@ public class UpdateProfile extends AppCompatActivity {
     }
     //update profile
     private void updateProfile(FirebaseUser firebaseUser) {
-        int selectedGenderID = radioGroupUpdateGender.getCheckedRadioButtonId();
-        radioButtonUpdateGenderSelected = findViewById(selectedGenderID);
-
-        //Validate Mobile Number using matcher and pattern (Regular Expression)
-        String mobileRegex = "[0][0-9]{9}"; //First no. should be 0 and rest 9 can be any no.
-        Matcher mobileMatcher;
-        Pattern mobilePattern = Pattern.compile(mobileRegex);
-        mobileMatcher = mobilePattern.matcher(textMobile);
-
-
-        if(TextUtils.isEmpty(textFullName)){
-            Toast.makeText(UpdateProfile.this, "Please enter your full name", Toast.LENGTH_LONG).show();
-            editTextUpdateName.setError("Full Name is required!");
-            editTextUpdateName.requestFocus();
-
-        }  else if (TextUtils.isEmpty(textDoB)) {
-            Toast.makeText(UpdateProfile.this, "Please enter your date of birth", Toast.LENGTH_LONG).show();
-            editTextUpdateDoB.setError("Date of birth is required!");
-            editTextUpdateDoB.requestFocus();
-
-        } else if (TextUtils.isEmpty(radioButtonUpdateGenderSelected.getText())) {
-            Toast.makeText(UpdateProfile.this, "Please enter your gender", Toast.LENGTH_LONG).show();
-            radioButtonUpdateGenderSelected.setError("Gender is required!");
-            radioButtonUpdateGenderSelected.requestFocus();
-
-        } else if (TextUtils.isEmpty(textMobile)) {
-            Toast.makeText(UpdateProfile.this, "Please enter your mobile number", Toast.LENGTH_LONG).show();
-            editTextUpdateMobile.setError("Mobile number is required!");
-            editTextUpdateMobile.requestFocus();
-
-        } else if (textMobile.length() != 10) {
-            Toast.makeText(UpdateProfile.this, "Please re-enter your mobile number", Toast.LENGTH_LONG).show();
-            editTextUpdateMobile.setError("Mobile No. should be 10 digits!");
-            editTextUpdateMobile.requestFocus();
-
-        } else if (!mobileMatcher.find()) {
-            Toast.makeText(UpdateProfile.this, "Please re-enter your mobile number", Toast.LENGTH_LONG).show();
-            editTextUpdateMobile.setError("Mobile No. is not valid");
-            editTextUpdateMobile.requestFocus();
-
-
-        } else {
-            textGender = radioButtonUpdateGenderSelected.getText().toString();
             textFullName = editTextUpdateName.getText().toString();
-            textDoB = editTextUpdateDoB.getText().toString();
             textMobile = editTextUpdateMobile.getText().toString();
 
-            //enter user data into Firebase Realtime Database. Set up dependencies
-            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textDoB, textGender, textMobile);
-
-            //Extract user reference
-            DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
+            // Extract user reference
+            DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
 
             String userID = firebaseUser.getUid();
 
             progressBar.setVisibility(View.VISIBLE);
 
-            referenceProfile.child(userID).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+            // Update only fullName and phoneNumber fields
+            Map<String, Object> updateValues = new HashMap<>();
+            updateValues.put("fullName", textFullName);
+            updateValues.put("phoneNumber", textMobile);
+
+            referenceProfile.child(userID).updateChildren(updateValues).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
-                        //setting a display name
+                    if (task.isSuccessful()) {
+                        // Update display name
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
                         firebaseUser.updateProfile(profileUpdates);
 
                         Toast.makeText(UpdateProfile.this, "Update Successful", Toast.LENGTH_SHORT).show();
 
-                        // stop user from returning to UpdateProfile activity on pressing back button and close activity
-                        Intent intent = new Intent(UpdateProfile.this, CreatorProfile.class );
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                        startActivity(intent);
-                        finish();
                     } else {
-                        try{
-                            throw task.getException();
-                        } catch (Exception e){
-                            Toast.makeText(UpdateProfile.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(UpdateProfile.this, "Failed to update profile", Toast.LENGTH_SHORT).show();
                     }
 
                     progressBar.setVisibility(View.GONE);
                 }
             });
-        }
 
     }
-
     //fetch data from database and display
     private void showProfile(FirebaseUser firebaseUser) {
         String userIDofRegistered = firebaseUser.getUid();
 
-        //Extracting user reference from Database for "Registered users"
+        // Extracting user reference from Database for "Registered users"
         DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
 
         progressBar.setVisibility(View.VISIBLE);
@@ -235,41 +154,25 @@ public class UpdateProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Users readUserDetails = snapshot.getValue(Users.class);
+
+                // Populate EditText fields with initial user profile data
                 if (readUserDetails != null) {
-                    textFullName = firebaseUser.getDisplayName();
-                    textDoB = readUserDetails.getRole();
-                    textGender = readUserDetails.getRole();
-                    textMobile = readUserDetails.getEmail();
-
-                    editTextUpdateName.setText(textFullName);
-                    editTextUpdateDoB.setText(textDoB);
-                    editTextUpdateMobile.setText(textMobile);
-
-                    //Show Gender through Radio Button
-                    if (textGender.equals("Male")){
-                        radioButtonUpdateGenderSelected = findViewById(R.id.radio_male);
-                    } else {
-                        radioButtonUpdateGenderSelected = findViewById(R.id.radio_female);
-
-                    }
-                    radioButtonUpdateGenderSelected.setChecked(true);
-
+                    editTextUpdateName.setText(readUserDetails.fullName);
+                    editTextUpdateDoB.setText(readUserDetails.role); // Assuming email is the role
+                    editTextUpdateMobile.setText(readUserDetails.phoneNumber);
                 } else {
-                    Toast.makeText(UpdateProfile.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateProfile.this, "User details not found", Toast.LENGTH_SHORT).show();
                 }
-                progressBar.setVisibility(View.GONE);
 
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(UpdateProfile.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
-
             }
         });
-
-
     }
 
     //Creating Actionbar menu

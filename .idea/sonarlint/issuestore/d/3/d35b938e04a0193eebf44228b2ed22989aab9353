@@ -31,7 +31,5 @@ java:S1450,"VRemove the "binding" field and declare it as a local variable in t
 java:S1450-"bRemove the "recyclerViewReviews" field and declare it as a local variable in the relevant methods.(É¿‘ƒùÿÿÿÿ8¸’¤ïâ1
 t
 java:S37764"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¨Œşÿÿÿÿ8Ç’¤ïâ1
-X
-java:S1751š"5Remove this "break" statement or make it conditional.(²ÿ®Ìüÿÿÿÿ8¸“¤ïâ1
 ;
-java:S2119¼"Save and re-use this "Random".(¼İÅf8Ä“¤ïâ1
+java:S2119¤"Save and re-use this "Random".(¼İÅf8Ä“¤ïâ1

@@ -265,54 +265,30 @@ public class ProfileDetailsActivity extends AppCompatActivity {
     private void sendMessage(String content, String userName, String receiverId, String senderId, String timeStamp) {
         DatabaseReference chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
 
-        // Assume you have a 'members' node under each chat that contains both senderId and receiverId
-        String membersKey = senderId.compareTo(receiverId) > 0 ? senderId + "_" + receiverId : receiverId + "_" + senderId;
+        // Generate the chatId using receiverId and senderId
+        String chatId = receiverId + "_" + senderId;
 
-        // Check for existing conversation by members
-        Query query = chatsRef.orderByChild("members").equalTo(membersKey);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String chatId = null;
+        // Reference to the specific chat
+        DatabaseReference chatRef = chatsRef.child(chatId).child("messages");
 
-                if (dataSnapshot.exists()) {
-                    // Existing conversation found, grab its chatId
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        chatId = snapshot.getKey();
-                        break; // Assuming unique chat sessions per user pair
-                    }
-                } else {
-                    // No existing conversation, create a new one
-                    chatId = chatsRef.push().getKey();
-                    if (chatId != null) {
-                        // Optionally set up members or other initial chat data
-                        chatsRef.child(chatId).child("members").setValue(membersKey);
-                    }
-                }
+        // Generate unique messageId
+        String messageId = chatRef.push().getKey();
 
-                if (chatId != null) {
-                    // Send the message now that we have a chatId
-                    DatabaseReference chatRef = chatsRef.child(chatId).child("messages");
-                    String messageId = chatRef.push().getKey();
-                    MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, userName);
+        // Create the message object
+        MessageModel message = new MessageModel(messageId, receiverId,chatId, senderId, content, timeStamp, userName);
 
-                    chatRef.child(messageId).setValue(message)
-                            .addOnSuccessListener(aVoid -> Toast.makeText(ProfileDetailsActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show())
-                            .addOnFailureListener(e -> Toast.makeText(ProfileDetailsActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ProfileDetailsActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Save the message to the chat node
+        chatRef.child(messageId).setValue(message)
+                .addOnSuccessListener(aVoid -> Toast.makeText(ProfileDetailsActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(ProfileDetailsActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
+
 
 
     // Method to generate a unique username
     private String generateUniqueUsername() {
-        String userName = "Unknown";
+        String userName = "User";
         Random random = new Random();
         int randomNumber = random.nextInt(1000);
         return userName + randomNumber;

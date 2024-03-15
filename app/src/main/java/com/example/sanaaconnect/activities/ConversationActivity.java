@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import com.example.sanaaconnect.Adapters.TextAdapters;
 import com.example.sanaaconnect.R;
 import com.example.sanaaconnect.models.MessageModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +35,6 @@ public class ConversationActivity extends AppCompatActivity {
     private String senderId, receiverId, chatId;
     private EditText editTextEt;
     private Button sendBtn;
-    private DatabaseReference chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,19 @@ public class ConversationActivity extends AppCompatActivity {
         receiverId = getIntent().getStringExtra("receiverId");
         chatId = getIntent().getStringExtra("chatId");
 
+        // Get the ID of the current logged-in user
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = currentUser != null ? currentUser.getUid() : null;
+
+        // Compare currentUserId with senderId and receiverId to determine new senderId and receiverId
+        if (currentUserId != null) {
+            if (currentUserId.equals(receiverId)) {
+                // If current user is the receiver, set senderId to current user's ID and receiverId to the other user's ID
+                senderId = currentUserId;
+                receiverId = getIntent().getStringExtra("senderId");
+            }
+        }
+
         fetchMessages();
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -69,20 +84,16 @@ public class ConversationActivity extends AppCompatActivity {
     }
 
     private void fetchMessages() {
-        DatabaseReference messagesRef = FirebaseDatabase.getInstance().getReference("Chats");
+        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(chatId).child("messages");
 
-        messagesRef.addValueEventListener(new ValueEventListener() {
+        chatRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
-                for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) {
-                    for (DataSnapshot messageSnapshot : chatSnapshot.child("messages").getChildren()) {
-                        MessageModel message = messageSnapshot.getValue(MessageModel.class);
-                        if (message != null &&
-                                ((message.getSenderId().equals(senderId) && message.getRecieverId().equals(receiverId)) ||
-                                        (message.getSenderId().equals(receiverId) && message.getRecieverId().equals(senderId)))) {
-                            list.add(message);
-                        }
+                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                    MessageModel message = messageSnapshot.getValue(MessageModel.class);
+                    if (message != null) {
+                        list.add(message);
                     }
                 }
                 textAdapters.notifyDataSetChanged();
@@ -96,49 +107,10 @@ public class ConversationActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String content) {
-        DatabaseReference messagesRef = FirebaseDatabase.getInstance().getReference("Chats");
-
-        // Check if there is an existing chat for the sender and receiver
-        String membersKey = senderId.compareTo(receiverId) > 0 ? senderId + "_" + receiverId : receiverId + "_" + senderId;
-        Query query = messagesRef.orderByChild("members").equalTo(membersKey);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) {
-                    // Iterate over each chat and check if it matches the membersKey
-                    String chatId = chatSnapshot.getKey();
-                    if (chatSnapshot.child("messages").child(chatId).child("chatId").getValue(String.class).equals(chatId)) {
-                        // Existing chat found, use this chatId to send the message
-                        sendMessageToExistingChat(chatId, content);
-                        return;
-                    }
-                }
-
-                // If no existing chat found, create a new chat and send the message
-                String chatId = messagesRef.push().getKey();
-                if (chatId != null) {
-                    // Set up initial chat details
-                    messagesRef.child(chatId).child("members").setValue(membersKey);
-                    sendMessageToExistingChat(chatId, content);
-                } else {
-                    // Handle error creating new chat
-                    Toast.makeText(ConversationActivity.this, "Failed to create new chat", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle onCancelled event
-                Toast.makeText(ConversationActivity.this, "Failed to check for existing chat: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void sendMessageToExistingChat(String chatId, String content) {
         DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(chatId).child("messages");
         String messageId = chatRef.push().getKey();
         String timeStamp = String.valueOf(System.currentTimeMillis());
-        MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, "Unknown");
+        MessageModel message = new MessageModel(messageId, receiverId, chatId, senderId, content, timeStamp, "Unknown");
 
         if (messageId != null) {
             chatRef.child(messageId).setValue(message).addOnCompleteListener(task -> {
@@ -153,5 +125,6 @@ public class ConversationActivity extends AppCompatActivity {
     }
 
 }
+
 
 
