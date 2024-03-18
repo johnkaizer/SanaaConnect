@@ -12,11 +12,12 @@ public class MessageModel {
     String content;
     String timeStamp;
     String userName;
+    String isRead;
 
     public MessageModel() {
     }
 
-    public MessageModel(String messageId, String recieverId, String chatId, String senderId, String content, String timeStamp, String userName) {
+    public MessageModel(String messageId, String recieverId, String chatId, String senderId, String content, String timeStamp, String userName, String isRead) {
         this.messageId = messageId;
         this.recieverId = recieverId;
         this.chatId = chatId;
@@ -24,6 +25,7 @@ public class MessageModel {
         this.content = content;
         this.timeStamp = timeStamp;
         this.userName = userName;
+        this.isRead = isRead;
     }
 
     public String getMessageId() {
@@ -80,6 +82,14 @@ public class MessageModel {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(String isRead) {
+        this.isRead = isRead;
     }
 
     // Utility method to get the current timestamp in a human-readable format

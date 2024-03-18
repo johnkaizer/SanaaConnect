@@ -82,6 +82,30 @@ public class ConversationActivity extends AppCompatActivity {
                 }
             }
         });
+        // Update isRead field for all messages under this chatId to true
+        updateMessagesAsRead(chatId);
+    }
+
+    private void updateMessagesAsRead(String chatId) {
+        DatabaseReference messagesRef = FirebaseDatabase.getInstance().getReference()
+                .child("Chats")
+                .child(chatId)
+                .child("messages");
+
+        // Add a listener to update each message's isRead field to true
+        messagesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                    messageSnapshot.getRef().child("isRead").setValue("true");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors
+            }
+        });
     }
 
     private void fetchMessages() {
@@ -111,7 +135,7 @@ public class ConversationActivity extends AppCompatActivity {
         DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(chatId).child("messages");
         String messageId = chatRef.push().getKey();
         String timeStamp = String.valueOf(System.currentTimeMillis());
-        MessageModel message = new MessageModel(messageId, receiverId, chatId, senderId, content, timeStamp, fullName);
+        MessageModel message = new MessageModel(messageId, receiverId, chatId, senderId, content, timeStamp, fullName,"false");
 
         if (messageId != null) {
             chatRef.child(messageId).setValue(message).addOnCompleteListener(task -> {

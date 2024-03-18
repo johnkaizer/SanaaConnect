@@ -206,7 +206,7 @@ public class JobDetailsActivity extends AppCompatActivity {
                     DatabaseReference chatRef = chatsRef.child(chatId).child("messages");
                     String messageId = chatRef.push().getKey();
 
-                    MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, userName);
+                    MessageModel message = new MessageModel(messageId, chatId, receiverId, senderId, content, timeStamp, userName,"false");
                     chatRef.child(messageId).setValue(message)
                             .addOnSuccessListener(aVoid -> {
                                 // Handle success

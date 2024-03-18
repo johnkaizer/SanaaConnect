@@ -275,7 +275,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         String messageId = chatRef.push().getKey();
 
         // Create the message object
-        MessageModel message = new MessageModel(messageId, receiverId,chatId, senderId, content, timeStamp, userName);
+        MessageModel message = new MessageModel(messageId, receiverId,chatId, senderId, content, timeStamp, userName,"false");
 
         // Save the message to the chat node
         chatRef.child(messageId).setValue(message)
