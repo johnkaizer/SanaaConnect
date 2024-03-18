@@ -1,35 +1,33 @@
 
 i
-java:S1192R"LDefine a constant instead of duplicating this literal "jobClientId" 4 times.(¡Ûç‘8×¤ïâ1
-m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÍöÁ8Ù¤ïâ1
-s	java:S117ª"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó¤¡Ÿıÿÿÿÿ8Ù¤ïâ1
+java:S1192R"LDefine a constant instead of duplicating this literal "jobClientId" 4 times.(¡Ûç‘8èÛú‚å1
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÍöÁ8éÛú‚å1
+s	java:S117ª"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó¤¡Ÿıÿÿÿÿ8êÛú‚å1
 J
-java:S1604j"(Make this anonymous inner class a lambda( ë¢«úÿÿÿÿ8Ù¤ïâ1
+java:S1604j"(Make this anonymous inner class a lambda( ë¢«úÿÿÿÿ8êÛú‚å1
 K
-java:S1604ƒ"(Make this anonymous inner class a lambda(ä€³Ñşÿÿÿÿ8Ú¤ïâ1
+java:S1604ƒ"(Make this anonymous inner class a lambda(ä€³Ñşÿÿÿÿ8êÛú‚å1
 F
-java:S1604•"(Make this anonymous inner class a lambda(¨ıÂÊ8Ú¤ïâ1
+java:S1604•"(Make this anonymous inner class a lambda(¨ıÂÊ8êÛú‚å1
 J
-java:S1604y"(Make this anonymous inner class a lambda(’ğ®©ıÿÿÿÿ8Ú¤ïâ1
+java:S1604y"(Make this anonymous inner class a lambda(’ğ®©ıÿÿÿÿ8ëÛú‚å1
 K
-java:S1604®"(Make this anonymous inner class a lambda(‚ÿÕ¿ûÿÿÿÿ8Û¤ïâ1
+java:S1604®"(Make this anonymous inner class a lambda(‚ÿÕ¿ûÿÿÿÿ8ëÛú‚å1
 K
-java:S1604»"(Make this anonymous inner class a lambda(ÿØ²øÿÿÿÿ8Û¤ïâ1
+java:S1604»"(Make this anonymous inner class a lambda(ÿØ²øÿÿÿÿ8ëÛú‚å1
 K
-java:S1604â"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8İ¤ïâ1
+java:S1604â"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8ìÛú‚å1
 K
-java:S1604é"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8İ¤ïâ1
+java:S1604é"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8ìÛú‚å1
 F
-java:S1604Ê"(Make this anonymous inner class a lambda(ĞÍÉ¨8Ş¤ïâ1
+java:S1604Ê"(Make this anonymous inner class a lambda(ĞÍÉ¨8ìÛú‚å1
 K
-java:S1604ù"(Make this anonymous inner class a lambda(¼ó÷Çøÿÿÿÿ8Ş¤ïâ1
+java:S1604ù"(Make this anonymous inner class a lambda(¼ó÷Çøÿÿÿÿ8ìÛú‚å1
 F
-java:S1604¤"(Make this anonymous inner class a lambda(éİ„ª8Ş¤ïâ1
+java:S1604¤"(Make this anonymous inner class a lambda(éİ„ª8íÛú‚å1
 x
-java:S1450,"VRemove the "binding" field and declare it as a local variable in the relevant methods.(¸—ÍÓüÿÿÿÿ8‘ÊÕûá1
+java:S1450,"VRemove the "binding" field and declare it as a local variable in the relevant methods.(¸—ÍÓüÿÿÿÿ8‹Şú‚å1
 „
-java:S1450-"bRemove the "recyclerViewReviews" field and declare it as a local variable in the relevant methods.(É¿‘ƒùÿÿÿÿ8¸’¤ïâ1
+java:S1450-"bRemove the "recyclerViewReviews" field and declare it as a local variable in the relevant methods.(É¿‘ƒùÿÿÿÿ8ŒŞú‚å1
 t
-java:S37764"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¨Œşÿÿÿÿ8Ç’¤ïâ1
-;
-java:S2119¤"Save and re-use this "Random".(¼İÅf8Ä“¤ïâ1
+java:S37764"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¨Œşÿÿÿÿ8šŞú‚å1

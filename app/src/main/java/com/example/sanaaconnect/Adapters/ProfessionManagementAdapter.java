@@ -196,7 +196,7 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
                 String Experience = experienceSpinner.getSelectedItem().toString();
                 String Education = educationSpinner.getSelectedItem().toString();
                 String Location = location.getText().toString();
-                // Retrieve ImageUrl from the existing professionModel
+                String ImageUrl = professionModel.getImageUrl();
 
                 // Check if any of the fields are empty
                 if (TextUtils.isEmpty(FullName) || TextUtils.isEmpty(Charges) || TextUtils.isEmpty(Location) ) {
@@ -214,7 +214,7 @@ public class ProfessionManagementAdapter extends RecyclerView.Adapter<Profession
                         .child(professionModel.getProffId())
                         .child(professionModel.getTitle()); // Add this line to specify the title node
 
-                ProfessionModel updatedProfessionModel = new ProfessionModel(clientId, FullName, Title, Education,Charges, "", Experience, Location,email,phone);
+                ProfessionModel updatedProfessionModel = new ProfessionModel(clientId, FullName, Title, Education,Charges, ImageUrl, Experience, Location,email,phone);
                 professionProfileRef.setValue(updatedProfessionModel)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

@@ -49,6 +49,7 @@ public class MessageAdapters extends RecyclerView.Adapter<MessageAdapters.ViewHo
                 intent.putExtra("senderId", messageModel.getSenderId());
                 intent.putExtra("receiverId", messageModel.getRecieverId());
                 intent.putExtra("chatId", messageModel.getChatId());
+                intent.putExtra("fullName", messageModel.getUserName());
 
                 // Start the ProfileDetails activity
                 context.startActivity(intent);

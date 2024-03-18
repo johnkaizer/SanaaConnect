@@ -132,7 +132,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         String content = MessageEt.getText().toString();
-                        String userName = generateUniqueUsername();
+                        String userName = getIntent().getStringExtra("fullName");
                         String receiverId = getIntent().getStringExtra("jobClientId");
                         String senderId = getUserUid();
                         String timeStamp = MessageModel.getCurrentTimeStamp();
@@ -281,17 +281,6 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         chatRef.child(messageId).setValue(message)
                 .addOnSuccessListener(aVoid -> Toast.makeText(ProfileDetailsActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(ProfileDetailsActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-    }
-
-
-
-
-    // Method to generate a unique username
-    private String generateUniqueUsername() {
-        String userName = "User";
-        Random random = new Random();
-        int randomNumber = random.nextInt(1000);
-        return userName + randomNumber;
     }
 
     private void fetchAndDisplayReviews(String clientId) {

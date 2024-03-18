@@ -32,7 +32,7 @@ public class ConversationActivity extends AppCompatActivity {
     private TextAdapters textAdapters;
     private ArrayList<MessageModel> list;
 
-    private String senderId, receiverId, chatId;
+    private String senderId, receiverId, chatId,fullName;
     private EditText editTextEt;
     private Button sendBtn;
 
@@ -54,6 +54,7 @@ public class ConversationActivity extends AppCompatActivity {
         senderId = getIntent().getStringExtra("senderId");
         receiverId = getIntent().getStringExtra("receiverId");
         chatId = getIntent().getStringExtra("chatId");
+        fullName = getIntent().getStringExtra("fullName");
 
         // Get the ID of the current logged-in user
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -110,7 +111,7 @@ public class ConversationActivity extends AppCompatActivity {
         DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(chatId).child("messages");
         String messageId = chatRef.push().getKey();
         String timeStamp = String.valueOf(System.currentTimeMillis());
-        MessageModel message = new MessageModel(messageId, receiverId, chatId, senderId, content, timeStamp, "Unknown");
+        MessageModel message = new MessageModel(messageId, receiverId, chatId, senderId, content, timeStamp, fullName);
 
         if (messageId != null) {
             chatRef.child(messageId).setValue(message).addOnCompleteListener(task -> {
